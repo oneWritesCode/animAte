@@ -1,9 +1,17 @@
-import React from 'react'
+import { Hero } from "@/components/Hero";
+import { Library } from "@/components/Library";
+import NewHero from "@/components/NewHero";
+import { Navbar } from "@/components/Navbar";
 
-const page = () => {
+export default function Page() {
   return (
-    <div>page</div>
-  )
+    <main className="flex-1">
+      <Navbar />
+      <Hero />
+      {/* <NewHero/> */}
+      <Library />
+      <section className="w-full h-[40vh]"></section>
+    </main>
+  );
 }
-
-export default page
+  

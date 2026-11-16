@@ -1,0 +1,152 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+import { animations, categories } from "@/animations/animations";
+import type { AnimationCategory, AnimationItem } from "@/lib/types";
+import { AnimationCard } from "@/components/AnimationCard";
+import { CodeModal } from "@/components/CodeModal";
+import { HeartIcon, SearchIcon } from "@/components/icons";
+
+const STORAGE_KEY = "ilove-animations-favourites";
+
+export function Library() {
+    const [query, setQuery] = useState("");
+    const [tab, setTab] = useState<(typeof categories)[number]["id"]>("all");
+    const [favourites, setFavourites] = useState<string[]>([]);
+    const [active, setActive] = useState<AnimationItem | null>(null);
+    const [toast, setToast] = useState<string | null>(null);
+    const [hydrated, setHydrated] = useState(false);
+
+    useEffect(() => {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) setFavourites(JSON.parse(raw) as string[]);
+        } catch {
+            /* ignore */
+        }
+        setHydrated(true);
+    }, []);
+
+    useEffect(() => {
+        if (!hydrated) return;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(favourites));
+    }, [favourites, hydrated]);
+
+    const cssBundle = useMemo(() => animations.map((a) => a.css).join("\n\n"), []);
+
+    const items = useMemo(() => {
+        const q = query.trim().toLowerCase();
+        return animations.filter((item) => {
+            const matchesTab =
+                tab === "all"
+                    ? true
+                    : tab === "favourites"
+                        ? favourites.includes(item.id)
+                        : item.category === (tab as AnimationCategory);
+            const matchesQuery = !q || item.name.toLowerCase().includes(q) || item.category.includes(q) || item.id.includes(q);
+            return matchesTab && matchesQuery;
+        });
+    }, [query, tab, favourites]);
+
+    function toggleFavourite(id: string) {
+        setFavourites((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+    }
+
+    function copied() {
+        setToast("CSS copied to clipboard");
+        window.setTimeout(() => setToast(null), 1600);
+    }
+
+    return (
+        <section id="library" className="relative mx-auto overflow-hidden w-full max-w-6xl px-4 pb-24 pt-8">
+            <style>{`${cssBundle}
+.anim-preview-loop [class^="anim-"],
+.anim-preview-loop[class^="anim-"] {
+  animation-iteration-count: infinite;
+}`}</style>
+
+            <div className="mb-8">
+                <h2 className="text-3xl font-semibold tracking-tight text-zinc-900">Animation Library</h2>
+                <p className="mt-2 text-zinc-500">Tap on mobile or hover on desktop to see options</p>
+            </div>
+            <label className="relative mb-6 block">
+                <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400">
+                    <SearchIcon />
+                </span>
+                <input
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search..."
+                    className="max-w-2xl min-w-xl rounded-full border border-zinc-200 bg-white py-3 pr-4 pl-11 text-sm text-zinc-800 outline-none ring-violet-200 placeholder:text-zinc-400 focus:ring-4"
+                />
+            </label>
+
+            <div className="mb-6 overflow-x-auto rounded-full border border-zinc-200 bg-zinc-50 p-1">
+                <div className="flex min-w-max">
+                    {categories.map((c) => (
+                        <button
+                            key={c.id}
+                            type="button"
+                            onClick={() => setTab(c.id)}
+                            className={`rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap transition ${tab === c.id ? "bg-white text-zinc-900 shadow-sm" : "text-zinc-500 hover:text-zinc-800"
+                                }`}
+                        >
+                            {c.label}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+
+
+            <p className="mb-4 text-sm text-zinc-400">{items.length} animations</p>
+
+            {items.length === 0 ? (
+                <div className="rounded-3xl border border-dashed border-zinc-200 py-16 text-center text-zinc-500">
+                    No animations match that filter yet.
+                </div>
+            ) : (
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                    {items.map((item) => (
+                        <AnimationCard
+                            key={item.id}
+                            item={item}
+                            favourite={favourites.includes(item.id)}
+                            onToggleFavourite={() => toggleFavourite(item.id)}
+                            onOpen={() => setActive(item)}
+                            onCopied={copied}
+                        />
+                    ))}
+                </div>
+            )}
+
+            {active ? <CodeModal item={active} onClose={() => setActive(null)} /> : null}
+
+            <button
+                type="button"   
+                onClick={() => setTab("favourites")}
+                className="fixed right-5 bottom-5 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-200 bg-white text-rose-500 shadow-lg"
+                aria-label="Open favourites"
+            >
+                <HeartIcon />
+            </button>
+
+            {toast ? (
+                <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full bg-zinc-950 px-4 py-2 text-sm text-white shadow-lg">
+                    {toast}
+                </div>
+            ) : null}
+            {/* <div className="absolute bottom-0 w-full">
+        <div className="w-full flex items-center justify-center">
+          <a href="#library" className="inline-flex items-center gap-2 rounded-2xl border border-zinc-200 bg-[var(--foreground)] px-4 py-2 text-sm font-semibold text-zinc-100 shadow-sm">
+            Browse Animations {`->`}
+          </a>
+        </div>
+        <div className="w-full h-[20vh] bg-linear-to-b from-transparent to-[var(--background)] z-999" />
+      </div> */}
+        </section>
+    );
+}
+
+export default Library;
+
