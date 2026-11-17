@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { animations, categories } from "@/animations/animations";
+import { animations, categories } from "@/lib/animations/animations";
 import type { AnimationCategory, AnimationItem } from "@/lib/types";
 import { AnimationCard } from "@/components/AnimationCard";
 import { CodeModal } from "@/components/CodeModal";
@@ -123,7 +123,7 @@ export function Library() {
             {active ? <CodeModal item={active} onClose={() => setActive(null)} /> : null}
 
             <button
-                type="button"   
+                type="button"
                 onClick={() => setTab("favourites")}
                 className="fixed right-5 bottom-5 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-200 bg-white text-rose-500 shadow-lg"
                 aria-label="Open favourites"

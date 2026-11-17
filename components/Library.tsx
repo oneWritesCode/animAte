@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { animations, categories } from "@/animations/animations";
+import { animations, categories } from "@/lib/animations/animations";
 import type { AnimationCategory, AnimationItem } from "@/lib/types";
 import { AnimationCard } from "./AnimationCard";
 import { CodeModal } from "./CodeModal";
@@ -58,19 +58,19 @@ export function Library() {
   }
 
   return (
-    <section id="library" className="relative mx-auto h-[150vh] overflow-hidden w-full max-w-6xl px-4 pb-24 pt-8">
+    <section id="library" className="relative mx-auto h-[150vh] overflow-hidden w-full max-w-6xl pt-4">
       <style>{`${cssBundle}
 .anim-preview-loop [class^="anim-"],
 .anim-preview-loop[class^="anim-"] {
   animation-iteration-count: infinite;
 }`}</style>
 
-      <div className="mb-8">
+      <div className="relative z-10 mb-8">
         <h2 className="text-3xl font-semibold tracking-tight text-zinc-900">Animation Library</h2>
-        <p className="mt-2 text-zinc-500">Tap on mobile or hover on desktop to see options</p>
+        <p className="mt-2 text-zinc-500">Hover to see options</p>
       </div>
 
-      <label className="relative mb-6 block">
+      <label className="relative z-10 mb-6 block">
         <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400">
           <SearchIcon />
         </span>
@@ -82,14 +82,14 @@ export function Library() {
         />
       </label>
 
-      <p className="mb-4 text-sm text-zinc-400">{items.length}+ animations</p>
+      <p className="relative z-10 mb-4 text-sm text-zinc-400">{items.length}+ animations</p>
 
       {items.length === 0 ? (
-        <div className="rounded-3xl border border-dashed border-zinc-200 py-16 text-center text-zinc-500">
+        <div className="relative z-10 rounded-3xl border border-dashed border-zinc-200 py-16 text-center text-zinc-500">
           No animations match that filter yet.
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="relative z-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((item) => (
             <AnimationCard
               key={item.id}

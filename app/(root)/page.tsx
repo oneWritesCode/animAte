@@ -11,6 +11,11 @@ export default function Page() {
       {/* <NewHero/> */}
       <Library />
       <section className="w-full h-[40vh]"></section>
+      {/* how to use  */}
+      {/* how to contribute */}
+      {/* sponsors */}
+      {/* credits */}
+      {/* footer */}
     </main>
   );
 }
