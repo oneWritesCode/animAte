@@ -1,0 +1,21 @@
+.magnetic-field {
+  display: grid;
+  place-items: center;
+  width: 240px;
+  height: 150px;
+}
+
+.magnetic-button {
+  padding: 14px 30px;
+  border: 0;
+  border-radius: 999px;
+  background: #18181b;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.magnetic-label {
+  display: inline-block;
+}
