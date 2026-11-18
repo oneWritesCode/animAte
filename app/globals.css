@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #FDF0EE;
+  --background: #faf6f6;
+  /* --background: #FDF0EE; */
   --foreground: #2D1810;
 
   /* Warm & Cozy Palette */
@@ -39,3 +40,41 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 }
+
+/* ── Floating Blob Gradient Animations ── */
+@keyframes blob-float-1 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33%       { transform: translate(28px, -22px) scale(1.08); }
+  66%       { transform: translate(-18px, 16px) scale(0.95); }
+}
+
+@keyframes blob-float-2 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33%       { transform: translate(-32px, 20px) scale(1.06); }
+  66%       { transform: translate(22px, -28px) scale(0.97); }
+}
+
+@keyframes blob-float-3 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33%       { transform: translate(18px, 30px) scale(0.93); }
+  66%       { transform: translate(-24px, -16px) scale(1.1); }
+}
+
+@keyframes blob-float-4 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  50%       { transform: translate(-20px, 24px) scale(1.05); }
+}
+
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(72px);
+  opacity: 0.55;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.blob-1 { animation: blob-float-1 9s ease-in-out infinite; }
+.blob-2 { animation: blob-float-2 11s ease-in-out infinite; }
+.blob-3 { animation: blob-float-3 13s ease-in-out infinite; }
+.blob-4 { animation: blob-float-4 7s ease-in-out infinite; }

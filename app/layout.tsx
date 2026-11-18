@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "animAte — Cute CSS animation library",
+  title: "animAte — a animation library",
   description:
-    "Browse a hundred CSS animations, preview them live, and copy the code into your projects.",
+    "Browse a hundreds of animations, preview them live, and copy the code into your projects.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

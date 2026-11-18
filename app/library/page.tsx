@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { animations, categories } from "@/lib/animations/animations";
+import { animations, categories } from "@/lib/animations/css/animations";
 import type { AnimationCategory, AnimationItem } from "@/lib/types";
 import { AnimationCard } from "@/components/AnimationCard";
 import { CodeModal } from "@/components/CodeModal";

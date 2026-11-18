@@ -1,6 +1,6 @@
+import Footer from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { Library } from "@/components/Library";
-import NewHero from "@/components/NewHero";
 import { Navbar } from "@/components/Navbar";
 
 export default function Page() {
@@ -10,12 +10,11 @@ export default function Page() {
       <Hero />
       {/* <NewHero/> */}
       <Library />
-      <section className="w-full h-[40vh]"></section>
+      {/* <section className="w-full h-[40vh]"></section> */}
       {/* how to use  */}
       {/* how to contribute */}
       {/* sponsors */}
-      {/* credits */}
-      {/* footer */}
+      {/* footer */} <Footer/>
     </main>
   );
 }
