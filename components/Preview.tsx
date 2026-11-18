@@ -1,11 +1,12 @@
-import type { AnimationItem } from "@/lib/types";
+import type { CssAnimationItem } from "@/lib/types";
 
+// Only change from your version: the item type is now CssAnimationItem.
 export function AnimationPreview({
   item,
   replayKey = 0,
   className = "",
 }: {
-  item: AnimationItem;
+  item: CssAnimationItem;
   replayKey?: number;
   className?: string;
 }) {

@@ -6,9 +6,10 @@ export function Hero() {
   return (
     <>
       <FloatingBlobs />
+      
       <section className="min-h-[110vh] flex flex-col items-center relative overflow-hidden px-4 pb-8 pt-16 sm:pt-24 z-10">
-        <FloatingElements />
-        <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
+        {/* <FloatingElements /> */}
+        <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center pt-10">
           <a
             href="#library"
             className="mb-8 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-sm text-zinc-600 shadow-sm"
@@ -20,7 +21,7 @@ export function Hero() {
           </a>
 
           <h1 className="text-4xl font-semibold tracking-tight capitalize text-zinc-900 sm:text-6xl sm:leading-[1.05]">
-            Add some motion in your website by using
+            make your components lively by using
             <span className="mt-1 block text-zinc-400">Animation Snippets</span>
           </h1>
           <p className="mt-6 max-w-xl text-base leading-7 text-zinc-500 sm:text-lg">

@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { animations, categories } from "@/lib/animations/animations";
+import { categories } from "@/lib/animations/css/animations";
+import { allAnimations } from "@/lib/animations";
 import type { AnimationCategory, AnimationItem } from "@/lib/types";
 import { AnimationCard } from "./AnimationCard";
 import { CodeModal } from "./CodeModal";
@@ -32,33 +33,49 @@ export function Library() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(favourites));
   }, [favourites, hydrated]);
 
-  const cssBundle = useMemo(() => animations.map((a) => a.css).join("\n\n"), []);
+  // Only CSS items contribute to the global stylesheet; component items bring their own styles.
+  const cssBundle = useMemo(
+    () =>
+      allAnimations
+        .flatMap((item) => (item.source === "css" ? [item.css] : []))
+        .join("\n\n"),
+    [],
+  );
 
   const items = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return animations.filter((item) => {
+    return allAnimations.filter((item) => {
       const matchesTab =
         tab === "all"
           ? true
           : tab === "favourites"
             ? favourites.includes(item.id)
             : item.category === (tab as AnimationCategory);
-      const matchesQuery = !q || item.name.toLowerCase().includes(q) || item.category.includes(q) || item.id.includes(q);
+      const matchesQuery =
+        !q ||
+        item.name.toLowerCase().includes(q) ||
+        item.category.includes(q) ||
+        item.id.includes(q);
       return matchesTab && matchesQuery;
     });
   }, [query, tab, favourites]);
 
   function toggleFavourite(id: string) {
-    setFavourites((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+    setFavourites((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
+    );
   }
 
-  function copied() {
-    setToast("CSS copied to clipboard");
+  function copied(message = "Copied to clipboard") {
+    setToast(message);
     window.setTimeout(() => setToast(null), 1600);
   }
 
   return (
-    <section id="library" className="relative mx-auto h-[150vh] overflow-hidden w-full max-w-6xl pt-4">
+    <section
+      id="library"
+      className="relative mx-auto h-[150vh] overflow-hidden w-full max-w-6xl pt-4"
+    >
       <style>{`${cssBundle}
 .anim-preview-loop [class^="anim-"],
 .anim-preview-loop[class^="anim-"] {
@@ -66,7 +83,9 @@ export function Library() {
 }`}</style>
 
       <div className="relative z-10 mb-8">
-        <h2 className="text-3xl font-semibold tracking-tight text-zinc-900">Animation Library</h2>
+        <h2 className="text-3xl font-semibold tracking-tight text-zinc-900">
+          Animation Library
+        </h2>
         <p className="mt-2 text-zinc-500">Hover to see options</p>
       </div>
 
@@ -82,7 +101,9 @@ export function Library() {
         />
       </label>
 
-      <p className="relative z-10 mb-4 text-sm text-zinc-400">{items.length}+ animations</p>
+      <p className="relative z-10 mb-4 text-sm text-zinc-400">
+        {items.length}+ animations
+      </p>
 
       {items.length === 0 ? (
         <div className="relative z-10 rounded-3xl border border-dashed border-zinc-200 py-16 text-center text-zinc-500">
@@ -103,16 +124,18 @@ export function Library() {
         </div>
       )}
 
-      {active ? <CodeModal item={active} onClose={() => setActive(null)} /> : null}
-
-      <button
+      {active ? (
+        <CodeModal item={active} onClose={() => setActive(null)} />
+      ) : null}
+      {/* a fixed heart in the right bottm corner */}
+      {/* <button
         type="button"
         onClick={() => setTab("favourites")}
         className="fixed right-5 bottom-5 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-[var(--color-border)] bg-white text-[var(--color-primary)] shadow-lg"
         aria-label="Open favourites"
       >
         <HeartIcon />
-      </button>
+      </button> */}
 
       {toast ? (
         <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full bg-zinc-950 px-4 py-2 text-sm text-white shadow-lg">
@@ -121,7 +144,10 @@ export function Library() {
       ) : null}
       <div className="absolute bottom-0 w-full z-999">
         <div className="w-full flex items-center justify-center">
-          <a href="#library" className="inline-flex items-center gap-2 rounded-2xl border border-zinc-200 bg-[var(--foreground)] px-4 py-2 text-sm font-semibold text-zinc-100 shadow-sm">
+          <a
+            href="/library"
+            className="inline-flex items-center gap-2 rounded-2xl border border-zinc-200 bg-[var(--foreground)] px-4 py-2 text-sm font-semibold text-zinc-100 shadow-sm"
+          >
             Browse Animations {`->`}
           </a>
         </div>

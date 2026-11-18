@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { loadAnimationCode } from "@/lib/animations/code";
 import type { AnimationItem } from "@/lib/types";
+import { ComponentPreview } from "./ComponentPreview";
 import { CodeIcon, CopyIcon, PlayIcon, SparkleIcon, StarIcon } from "./icons";
 import { AnimationPreview } from "./Preview";
 
@@ -16,14 +18,34 @@ export function AnimationCard({
   favourite: boolean;
   onToggleFavourite: () => void;
   onOpen: () => void;
-  onCopied: () => void;
+  onCopied: (message?: string) => void;
 }) {
   const [replayKey, setReplayKey] = useState(0);
   const darkPreview = item.id === "neon-text";
 
   async function copy() {
-    await navigator.clipboard.writeText(item.css);
-    onCopied();
+    if (item.source === "css") {
+      await navigator.clipboard.writeText(item.css);
+      onCopied("CSS copied to clipboard");
+      return;
+    }
+
+    try {
+      const { files, dependencies } = await loadAnimationCode(item);
+      if (files.length > 1) {
+        // several files can't go on one clipboard: let the user copy each one in the modal
+        onOpen();
+        return;
+      }
+      await navigator.clipboard.writeText(files[0].code);
+      onCopied(
+        dependencies.length > 0
+          ? `Copied. Install first: npm install ${dependencies.join(" ")}`
+          : "Code copied to clipboard",
+      );
+    } catch {
+      onOpen(); // code failed to load: the modal shows the error and a retry
+    }
   }
 
   return (
@@ -33,11 +55,15 @@ export function AnimationCard({
     >
       <div className={`absolute inset-0 ${darkPreview ? "bg-zinc-950" : "bg-gradient-to-b from-white to-[var(--color-surface)]"}`}>
         <div className="flex h-full items-center justify-center">
-          <AnimationPreview item={item} replayKey={replayKey} />
+          {item.source === "css" ? (
+            <AnimationPreview item={item} replayKey={replayKey} />
+          ) : (
+            <ComponentPreview item={item} replayKey={replayKey} />
+          )}
         </div>
       </div>
 
-      <button
+      {/* <button
         type="button"
         onClick={(e) => {
           e.stopPropagation();
@@ -47,9 +73,9 @@ export function AnimationCard({
         aria-label={favourite ? "Remove favourite" : "Add favourite"}
       >
         <StarIcon filled={favourite} />
-      </button>
+      </button> */}
 
-      {item.isNew ? (
+      {item.tag ? (
         <span className="absolute right-3 top-3 z-10 inline-flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-1 text-xs font-medium text-[var(--color-primary)] shadow-sm backdrop-blur">
           <SparkleIcon className="h-3 w-3" />
           New
