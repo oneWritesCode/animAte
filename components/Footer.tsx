@@ -17,25 +17,25 @@ const footerColumns: FooterColumn[] = [
       { label: "Explore animations", href: "#animations" },
       { label: "Categories", href: "#categories" },
       { label: "How it works", href: "#how-it-works" },
-      { label: "What's new", href: "#updates" },
+      // { label: "What's new", href: "#updates" },
     ],
   },
   {
     title: "CONTRIBUTE",
     links: [
-      { label: "Submit an animation", href: "#submit" },
-      { label: "Contribution guide", href: "#contribute" },
-      { label: "Request an animation", href: "#request" },
-      { label: "Report an issue", href: "#issues" },
+      // { label: "Submit an animation", href: "https://github.com/onewritescode/animAte" },
+      { label: "Contribution guide", href: "https://github.com/onewritescode/animAte" },
+      { label: "Request an animation", href: "https://github.com/onewritescode/animAte/issues" },
+      { label: "Report an issue", href: "https://github.com/onewritescode/animAte/issues" },
     ],
   },
   {
     title: "CONNECT",
     links: [
-      { label: "GitHub", href: "https://github.com/" },
-      { label: "X / Twitter", href: "https://x.com/" },
-      { label: "LinkedIn", href: "https://linkedin.com/" },
-      { label: "Email", href: "mailto:hello@animate.app" },
+      { label: "GitHub", href: "https://github.com/onewritescode" },
+      { label: "X / Twitter", href: "https://x.com/triordeep" },
+      { label: "LinkedIn", href: "https://linkedin.com/in/" },
+      // { label: "Email", href: "mailto:triordeep@gmail.com" },
     ],
   },
   {
@@ -49,33 +49,33 @@ const footerColumns: FooterColumn[] = [
 ];
 
 export default function Footer() {
-  const year = new Date().getFullYear();
+  // const year = new Date().getFullYear();
 
   return (
-    <footer className="relative isolate mt-24 min-h-[620px] overflow-hidden bg-gradient-to-b from-[var(--background)] via-[var(--color-primary)/80] to-[var(--color-primary)] text-[#20212a]">
+    <footer className="relative isolate mt-24 min-h-[620px] overflow-hidden bg-gradient-to-b from-[var(--background)] via-[var(--color-primary)]/30 to-[var(--color-primary)]/90 text-[#20212a]">
       {/* Soft light near the top keeps the content area calm. */}
       <div
         aria-hidden="true"
         // className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_5%,rgba(255,226,218,0.48),transparent_48%)]"
       />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-14 pb-56 pt-24 lg:grid-cols-[1.55fr_repeat(4,minmax(0,1fr))] lg:gap-10 lg:pb-64 lg:pt-28">
+      <div className="relative mb-8 z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-14 pb-56 pt-24 lg:grid-cols-[1.55fr_repeat(4,minmax(0,1fr))] lg:gap-10 lg:pb-64 lg:pt-28">
         {/* Brand / short message */}
         <div className="flex flex-col items-start">
           <a
             href="/"
             aria-label="AnimAte home"
-            className="text-4xl font-semibold leading-[1.08] tracking-[-0.055em] transition-opacity hover:opacity-75 sm:text-5xl"
+            className="text-4xl font-semibold uppercase leading-[0.8] tracking-[-0.055em] transition-opacity hover:opacity-75"
           >
             Make it move.
             <br />
-            Make it yours<span className="text-[#f47782]">.</span>
+            Make it yours<span className="text-[var(--color-primary)]">.</span>
           </a>
 
           <div className="mt-12 space-y-1.5 text-xs leading-relaxed text-[#65748a]">
-            <p>© {year} AnimAte. All rights reserved.</p>
+            <p>© 2026 AnimAte. All rights reserved.</p>
             <p>
-              Made with <span className="text-[#f47782]">♥</span> for the love of
+              Made with <span className="text-[var(--color-primary)]">{"♥"}</span> for the love of
               motion.
             </p>
           </div>
@@ -83,16 +83,16 @@ export default function Footer() {
 
         {/* Footer navigation */}
         {footerColumns.map((column) => (
-          <nav key={column.title} aria-label={column.title}>
-            <h2 className="mb-6 text-[10px] font-bold tracking-[0.2em] text-[#8793a5]">
+          <nav key={column.title} aria-label={column.title} className="text-center">
+            <h2 className="mb-4 text-sm font-bold tracking-[0.1em] ">
               {column.title}
             </h2>
-            <ul className="space-y-4">
+            <ul className="space-y-2">
               {column.links.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-sm font-medium text-[#65748a] transition-colors duration-200 hover:text-[#20212a] sm:text-base"
+                    className="text-xs text-[#65748a] transition-colors duration-200 hover:text-[#20212a]"
                   >
                     {link.label}
                   </a>
