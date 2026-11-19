@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { AnimationItem } from "@/lib/types";
+import type { CssAnimationItem } from "@/lib/types";
 import { CheckIcon, CloseIcon, CopyIcon } from "./icons";
 import { AnimationPreview } from "./Preview";
 
@@ -9,7 +9,7 @@ export function CodeModal({
   item,
   onClose,
 }: {
-  item: AnimationItem;
+  item: CssAnimationItem;
   onClose: () => void;
 }) {
   const [tab, setTab] = useState<"css" | "html">("css");

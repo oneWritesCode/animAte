@@ -1,19 +1,20 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { animations, categories } from "@/lib/animations/css/animations";
-import type { AnimationCategory, AnimationItem } from "@/lib/types";
+import { categories } from "@/lib/animations/css/animations";
+import { allAnimations } from "@/lib/animations";
+import type { AnimationCategory, CssAnimationItem } from "@/lib/types";
 import { AnimationCard } from "@/components/AnimationCard";
 import { CodeModal } from "@/components/CodeModal";
 import { HeartIcon, SearchIcon } from "@/components/icons";
 
 const STORAGE_KEY = "ilove-animations-favourites";
 
-export function Library() {
+function Library() {
     const [query, setQuery] = useState("");
     const [tab, setTab] = useState<(typeof categories)[number]["id"]>("all");
     const [favourites, setFavourites] = useState<string[]>([]);
-    const [active, setActive] = useState<AnimationItem | null>(null);
+    const [active, setActive] = useState<CssAnimationItem | null>(null);
     const [toast, setToast] = useState<string | null>(null);
     const [hydrated, setHydrated] = useState(false);
 
@@ -32,11 +33,11 @@ export function Library() {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(favourites));
     }, [favourites, hydrated]);
 
-    const cssBundle = useMemo(() => animations.map((a) => a.css).join("\n\n"), []);
+    const cssBundle = useMemo(() => allAnimations.flatMap((item) => (item.source === "css" ? [item.css] : [])).join("\n\n"), []);
 
     const items = useMemo(() => {
         const q = query.trim().toLowerCase();
-        return animations.filter((item) => {
+        return allAnimations.filter((item) => {
             const matchesTab =
                 tab === "all"
                     ? true
@@ -52,8 +53,8 @@ export function Library() {
         setFavourites((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
     }
 
-    function copied() {
-        setToast("CSS copied to clipboard");
+    function copied(message = "Copied to clipboard") {
+        setToast(message);
         window.setTimeout(() => setToast(null), 1600);
     }
 
@@ -113,7 +114,7 @@ export function Library() {
                             item={item}
                             favourite={favourites.includes(item.id)}
                             onToggleFavourite={() => toggleFavourite(item.id)}
-                            onOpen={() => setActive(item)}
+                            onOpen={() => item.source === "css" && setActive(item)}
                             onCopied={copied}
                         />
                     ))}

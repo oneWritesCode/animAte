@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { loadAnimationCode } from "@/lib/animations/code";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type { AnimationItem } from "@/lib/types";
 import { ComponentPreview } from "./ComponentPreview";
 import { CodeIcon, CopyIcon, PlayIcon, SparkleIcon, StarIcon } from "./icons";
@@ -20,38 +21,30 @@ export function AnimationCard({
   onOpen: () => void;
   onCopied: (message?: string) => void;
 }) {
+  const router = useRouter();
   const [replayKey, setReplayKey] = useState(0);
   const darkPreview = item.id === "neon-text";
 
-  async function copy() {
-    if (item.source === "css") {
-      await navigator.clipboard.writeText(item.css);
-      onCopied("CSS copied to clipboard");
-      return;
-    }
+  // CSS animations are short, so they copy straight from the card or open the modal.
+  // JSX animations (gsap / framer-motion) can be long: send the user to the playground
+  // so they read and tweak the implementation instead of copying code blindly.
+  const playgroundHref = `/playground/${item.id}`;
 
-    try {
-      const { files, dependencies } = await loadAnimationCode(item);
-      if (files.length > 1) {
-        // several files can't go on one clipboard: let the user copy each one in the modal
-        onOpen();
-        return;
-      }
-      await navigator.clipboard.writeText(files[0].code);
-      onCopied(
-        dependencies.length > 0
-          ? `Copied. Install first: npm install ${dependencies.join(" ")}`
-          : "Code copied to clipboard",
-      );
-    } catch {
-      onOpen(); // code failed to load: the modal shows the error and a retry
-    }
+  async function copyCss() {
+    if (item.source !== "css") return;
+    await navigator.clipboard.writeText(item.css);
+    onCopied("CSS copied to clipboard");
+  }
+
+  function open() {
+    if (item.source === "css") onOpen();
+    else router.push(playgroundHref);
   }
 
   return (
     <article
       className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-[28px] border border-zinc-100 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
-      onClick={onOpen}
+      onClick={open}
     >
       <div className={`absolute inset-0 ${darkPreview ? "bg-zinc-950" : "bg-gradient-to-b from-white to-[var(--color-surface)]"}`}>
         <div className="flex h-full items-center justify-center">
@@ -84,26 +77,38 @@ export function AnimationCard({
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center p-3 opacity-0 transition group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100 max-sm:pointer-events-auto max-sm:opacity-100">
         <div className="flex items-center gap-1 rounded-full border border-zinc-200 bg-white/95 p-1 shadow-lg backdrop-blur">
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              copy();
-            }}
-            className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium text-zinc-700 hover:bg-zinc-100"
-          >
-            <CopyIcon /> Copy
-          </button>
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              onOpen();
-            }}
-            className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium text-zinc-700 hover:bg-zinc-100"
-          >
-            <CodeIcon /> Code
-          </button>
+          {item.source === "css" ? (
+            <>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  copyCss();
+                }}
+                className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium text-zinc-700 hover:bg-zinc-100"
+              >
+                <CopyIcon /> Copy
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onOpen();
+                }}
+                className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium text-zinc-700 hover:bg-zinc-100"
+              >
+                <CodeIcon /> Code
+              </button>
+            </>
+          ) : (
+            <Link
+              href={playgroundHref}
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium text-zinc-700 hover:bg-zinc-100"
+            >
+              <CodeIcon /> Playground
+            </Link>
+          )}
           <button
             type="button"
             onClick={(e) => {

@@ -43,3 +43,6 @@ next-env.d.ts
 # registry
 *registry.generated.ts
 *public/r/
+# playground runtime (generated)
+public/playground-runtime.js
+public/playground-tailwind.js

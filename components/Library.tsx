@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { categories } from "@/lib/animations/css/animations";
 import { allAnimations } from "@/lib/animations";
-import type { AnimationCategory, AnimationItem } from "@/lib/types";
+import type { AnimationCategory, CssAnimationItem } from "@/lib/types";
 import { AnimationCard } from "./AnimationCard";
 import { CodeModal } from "./CodeModal";
 import { HeartIcon, SearchIcon } from "./icons";
@@ -14,7 +14,7 @@ export function Library() {
   const [query, setQuery] = useState("");
   const [tab, setTab] = useState<(typeof categories)[number]["id"]>("all");
   const [favourites, setFavourites] = useState<string[]>([]);
-  const [active, setActive] = useState<AnimationItem | null>(null);
+  const [active, setActive] = useState<CssAnimationItem | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const [hydrated, setHydrated] = useState(false);
 
@@ -117,7 +117,7 @@ export function Library() {
               item={item}
               favourite={favourites.includes(item.id)}
               onToggleFavourite={() => toggleFavourite(item.id)}
-              onOpen={() => setActive(item)}
+              onOpen={() => item.source === "css" && setActive(item)}
               onCopied={copied}
             />
           ))}
