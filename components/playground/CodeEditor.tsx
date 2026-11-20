@@ -2,11 +2,21 @@
 
 import { useEffect, useRef } from "react";
 import { EditorState } from "@codemirror/state";
-import { EditorView, keymap, lineNumbers, highlightActiveLine } from "@codemirror/view";
-import { defaultKeymap, history, historyKeymap, indentWithTab } from "@codemirror/commands";
+import {
+  EditorView,
+  keymap,
+  lineNumbers,
+  highlightActiveLine,
+} from "@codemirror/view";
+import {
+  defaultKeymap,
+  history,
+  historyKeymap,
+  indentWithTab,
+} from "@codemirror/commands";
 import { javascript } from "@codemirror/lang-javascript";
 import { css } from "@codemirror/lang-css";
-import { oneDark } from "@codemirror/theme-one-dark";
+import { materialLight, materialDark } from "@uiw/codemirror-theme-material";
 
 interface CodeEditorProps {
   /** Changing `fileName` loads a different document; typing only reports through onChange. */
@@ -17,10 +27,34 @@ interface CodeEditorProps {
 
 const editorTheme = EditorView.theme({
   "&": { height: "100%", fontSize: "13px" },
-  ".cm-scroller": { fontFamily: "var(--font-geist-mono), ui-monospace, monospace", lineHeight: "1.6" },
+  ".cm-scroller": {
+    fontFamily: "var(--font-geist-mono), ui-monospace, monospace",
+    lineHeight: "1.6",
+  },
 });
 
-export default function CodeEditor({ fileName, initialCode, onChange }: CodeEditorProps) {
+const materialDarkerOverrides = EditorView.theme(
+  {
+    "&": { backgroundColor: "#1C1411", color: "#EEFFFF" },
+    ".cm-gutters": {
+      backgroundColor: "#1C1411",
+      color: "#545454",
+      border: "none",
+    },
+    ".cm-activeLine, .cm-activeLineGutter": { backgroundColor: "#1C1411" },
+    ".cm-selectionBackground, &.cm-focused .cm-selectionBackground": {
+      backgroundColor: "#404040 !important",
+    },
+    ".cm-cursor": { borderLeftColor: "#FFCC00" },
+  },
+  { dark: true },
+);
+
+export default function CodeEditor({
+  fileName,
+  initialCode,
+  onChange,
+}: CodeEditorProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const onChangeRef = useRef(onChange);
 
@@ -32,7 +66,9 @@ export default function CodeEditor({ fileName, initialCode, onChange }: CodeEdit
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const language = fileName.endsWith(".css") ? css() : javascript({ jsx: true, typescript: true });
+    const language = fileName.endsWith(".css")
+      ? css()
+      : javascript({ jsx: true, typescript: true });
     const view = new EditorView({
       parent: containerRef.current,
       state: EditorState.create({
@@ -43,10 +79,12 @@ export default function CodeEditor({ fileName, initialCode, onChange }: CodeEdit
           history(),
           keymap.of([...defaultKeymap, ...historyKeymap, indentWithTab]),
           language,
-          oneDark,
+          materialDarkerOverrides,
+          materialDark,
           editorTheme,
           EditorView.updateListener.of((update) => {
-            if (update.docChanged) onChangeRef.current(update.state.doc.toString());
+            if (update.docChanged)
+              onChangeRef.current(update.state.doc.toString());
           }),
         ],
       }),
@@ -57,5 +95,10 @@ export default function CodeEditor({ fileName, initialCode, onChange }: CodeEdit
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileName]);
 
-  return <div ref={containerRef} className="bg-red-800 border-4 w-[100vw] h-full overflow-hidden [&_.cm-editor]:h-full" />;
+  return (
+    <div
+      ref={containerRef}
+      className="w-[100vw] h-full overflow-hidden [&_.cm-editor]:h-full"
+    />
+  );
 }

@@ -33,7 +33,7 @@ const FRAME_DOCUMENT = `<!doctype html>
     <meta charset="utf-8" />
     <style>
       html, body { margin: 0; height: 100%; }
-      body { display: flex; align-items: center; justify-content: center; background: #0f0a0a; color: #fff; font-family: system-ui, sans-serif; }
+      body { display: flex; align-items: center; justify-content: center; font-family: system-ui, sans-serif; }
     </style>
   </head>
   <body>
@@ -93,7 +93,7 @@ export default function PreviewFrame({ files, entry, restartKey }: PreviewFrameP
   }, [files, entry]);
 
   return (
-    <div className="relative h-full w-full bg-backg">
+    <div className="relative h-full w-full ">
       <StatusBar status={status} />
       <iframe
         key={restartKey}
@@ -130,7 +130,7 @@ function StatusBar({ status }: { status: PreviewStatus }) {
           status === "error"
             ? "bg-red-500/20 text-red-200"
             : status === "ready"
-              ? "bg-emerald-400/15 text-emerald-200"
+              ? "bg-emerald-600/15 text-emerald-700"
               : "bg-white/10 text-white/70"
         }`}
       >
