@@ -25,24 +25,41 @@ const TIERS: Tier[] = [
     name: "Builder",
     price: "$15",
     description: "For developers who use animAte every week.",
-    perks: ["Everything in Supporter", "Vote on what gets built next", "Sponsor badge on GitHub"],
+    perks: [
+      "Everything in Supporter",
+      "Vote on what gets built next",
+      "Sponsor badge on GitHub",
+    ],
     highlighted: true,
   },
   {
     name: "Studio",
     price: "$50",
     description: "For teams and companies shipping with animAte.",
-    perks: ["Everything in Builder", "Your logo on the landing page", "Priority animation requests"],
+    perks: [
+      "Everything in Builder",
+      "Your logo on the landing page",
+      "Priority animation requests",
+    ],
   },
 ];
 
 const FUNDS = [
-  { title: "New animations", text: "More time to design, build and polish them every week." },
-  { title: "Hosting & tooling", text: "Keeping the library and the playground fast and online." },
-  { title: "Staying free", text: "The core library stays free and open source for everyone." },
+  {
+    title: "New animations",
+    text: "More time to design, build and polish them every week.",
+  },
+  {
+    title: "Hosting & tooling",
+    text: "Keeping the library and the playground fast and online.",
+  },
+  {
+    title: "Staying free",
+    text: "The core library stays free and open source for everyone.",
+  },
 ];
 
-const WALL_SLOTS = 6;
+const WALL_SLOTS = SPONSOR_URL.length ? 1 : 0;
 
 function HeartIcon() {
   return (
@@ -57,11 +74,11 @@ export default function Sponsors() {
     <MotionConfig reducedMotion="user">
       <section id="sponsors" className="relative mx-auto w-full max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-surface-alt)] px-3 py-1 text-xs font-semibold text-[var(--color-primary)] capitalize">
+          {/* <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-surface-alt)] px-3 py-1 text-xs font-semibold text-[var(--color-primary)] capitalize">
             Sponsors
-          </span>
+          </span> */}
           <h2 className="mt-2 text-2xl font-semibold tracking-tight">
-            Help keep animAte growing
+            Help animAte growing
           </h2>
           {/* <p className="mt-4 text-lg text-zinc-500">
             animAte is built and maintained by one person. Sponsors make it possible to keep shipping and keep it free.
@@ -147,6 +164,13 @@ export default function Sponsors() {
                 {slot === 0 ? "Your logo here" : "+"}
               </a>
             ))}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-40 aspect-square items-center justify-center rounded-2xl border border-dashed border-black/50 text-xs hover:border-2 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-all duration-800"
+            >
+              {"+"}
+            </a>
           </div>
         </div>
       </section>

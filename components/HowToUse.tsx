@@ -97,7 +97,7 @@ const STEPS = [
 export default function HowToUse() {
   return (
     <MotionConfig reducedMotion="user">
-      <section id="how-it-works" className="relative mx-auto w-full max-w-6xl scroll-mt-24 px-4 pt-24">
+      <section id="how-it-works" className="relative mx-auto w-full max-w-6xl px-4 py-20">
         <div className="mx-auto mb-14 max-w-2xl text-center">
           {/* <p className="text-sm font-semibold uppercase tracking-widest text-[var(--color-primary)]">How it works</p>
           <h2 className="mt-3 text-4xl font-semibold tracking-tight text-zinc-900 sm:text-5xl">

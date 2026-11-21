@@ -66,7 +66,7 @@ function PlaygroundMock() {
 export default function AboutPlayground() {
   return (
     <MotionConfig reducedMotion="user">
-      <section id="playground" className="relative overflo mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-24">
+      <section id="playground" className="relative overflo mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-10">
         <div className="grid items-center gap-16 lg:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, x: -28 }}
@@ -78,7 +78,7 @@ export default function AboutPlayground() {
             <h2 className="mt-3 text-4xl font-semibold tracking-tight text-zinc-900 sm:text-5xl">
               Don&apos;t just copy it. Understand it.
             </h2>
-            <p className="mt-4 text-lg leading-relaxed text-zinc-500">
+            <p className="mt-4 text-md text-zinc-500">
               Real animations can be long. Open any gsap or framer-motion animation in the playground, read how it works,
               tweak the values, and see the result immediately.
             </p>

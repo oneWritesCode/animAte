@@ -232,7 +232,7 @@ export default function Playground({
           onPointerDown={startDrag}
           className="flex shrink-0 cursor-grab touch-none select-none items-center overflow-hidden  active:cursor-grabbing"
         >
-          <span className="whitespace-nowrap rounded-t-[1.1rem] border border-black/10 bg-background p-2 text-sm">
+          <span className="whitespace-nowrap rounded-t-[1.1rem] border border-black/10 bg-background text-black font-semibold p-2 text-sm">
             Animation
           </span>
         </div>

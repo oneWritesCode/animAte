@@ -143,14 +143,14 @@ export function Library() {
         </div>
       ) : null}
       <div className="absolute bottom-0 w-full z-999">
-        <div className="absolute bottom-0 w-full flex items-center justify-center">
+        {/* <div className="absolute bottom-0 w-full flex items-center justify-center">
           <a
             href="/library"
             className="inline-flex items-center gap-2 rounded-[0.9rem] border border-zinc-200 bg-[var(--foreground)] px-4 py-3 text-sm font-semibold text-zinc-100 shadow-md"
           >
             Browse Animations {`->`}
           </a>
-        </div>
+        </div> */}
         <div className="w-full h-[20vh] bg-linear-to-b from-transparent via-background/40 to-background" />
       </div>
     </section>

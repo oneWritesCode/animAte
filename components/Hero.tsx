@@ -13,7 +13,7 @@ export function Hero() {
     <>
       <FloatingBlobs />
 
-      <section ref={heroRef} className="min-h-[110vh] flex flex-col items-center relative overflow-hidden z-10">
+      <section ref={heroRef} className="min-h-[100vh] flex flex-col items-center relative overflow-hidden z-10">
         <div className="relative mx-auto min-h-screen flex max-w-3xl flex-col items-center justify-center text-center z-10">
           <a
             href="#library"

@@ -1,3 +1,4 @@
+import AboutLibrary from "@/components/AboutLibrary";
 import AboutPlayground from "@/components/AboutPlayground";
 import Footer from "@/components/Footer";
 import { Hero } from "@/components/Hero";
@@ -12,10 +13,10 @@ export default function Page() {
     <main className="flex-1">
       <Navbar />
       <Hero />
-      <Library />
+      <AboutLibrary />
       {/* <section className="w-full h-[40vh]"></section> */}
-      {/* how to use  */} <HowToUse />
       {/* about playground */} <AboutPlayground />
+      {/* how to use  */} <HowToUse />
       {/* how to contribute <HowToContribute /> */}
       {/* sponsors */} <Sponsors />
       {/* footer */} <Footer />
