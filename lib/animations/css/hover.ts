@@ -6,6 +6,7 @@ export const hoverDefs: Def[] = [
     id: "lift",
     name: "Lift Hover",
     category: "hover",
+    tags: ["css", "hover", "transform", "shadow", "interactive", "box", "btn", "card"],
     classBody: `${box}\n  transition: transform 0.3s ease, box-shadow 0.3s ease;`,
     hoverBody: `  transform: translateY(-10px);\n  box-shadow: 0 18px 30px rgba(232, 83, 74, 0.28);`,
   },
@@ -75,7 +76,7 @@ export const hoverDefs: Def[] = [
 //     id: "color-wash",
 //     name: "Color Wash",
 //     category: "hover",
-//     classBody: `${box}\n  background: linear-gradient(135deg, #E8534A, #F5A67A);\n  transition: filter 0.35s ease;`,
+//     classBody: `${box}\n  background: linear-gradient(135deg, #E8534A, #E8534A);\n  transition: filter 0.35s ease;`,
 //     hoverBody: `  filter: hue-rotate(20deg) saturate(1.3);`,
 //   },
 //   {

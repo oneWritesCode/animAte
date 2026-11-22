@@ -43,7 +43,7 @@ export const categories: {
   { id: "loaders", label: "Loaders" },
   { id: "text", label: "Text" },
   { id: "background", label: "Background" },
-  { id: "favourites", label: "Favourites" },
+  // { id: "favourites", label: "Favourites" },
 ];
 
 export default animations;

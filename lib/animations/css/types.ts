@@ -14,6 +14,8 @@ export type Def = {
   name: string;
   category: AnimationCategory;
   tag?: string;
+  /** Multiple searchable tags, e.g. ["css", "loader", "spinner", "infinite"] */
+  tags?: string[];
   kind?: CssPreviewKind;
   keyframes?: string;
   duration?: string;
@@ -29,7 +31,7 @@ export type Def = {
 export const box = `  width: 72px;
   height: 72px;
   border-radius: 18px;
-  background: linear-gradient(135deg, #E8534A, #F5A67A);`;
+  background: linear-gradient(135deg, #E8534A, #E8534A);`;
 
 /** Same as before, plus the two new fields: `source` and `dependencies`. */
 export function build(def: Def): CssAnimationItem {
@@ -75,6 +77,7 @@ export function build(def: Def): CssAnimationItem {
     name: def.name,
     category: def.category,
     tag: def.tag,
+    tags: def.tags,
     kind,
     dependencies: [],
     className,

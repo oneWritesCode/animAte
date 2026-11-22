@@ -4,7 +4,6 @@ import { motion, type Variants } from "framer-motion";
 
 const ITEMS = ["Design", "Develop", "Animate", "Ship"];
 
-// The parent only orchestrates: it delays each child by 120ms.
 const listVariants: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
@@ -25,21 +24,14 @@ export default function StaggeredFadeUp() {
       variants={listVariants}
       initial="hidden"
       animate="show"
-      style={{ display: "grid", gap: 10, margin: 0, padding: 0, listStyle: "none" }}
+      className="grid gap-2.5 m-0 p-0 list-none"
     >
       {ITEMS.map((label) => (
         <motion.li
           key={label}
           variants={itemVariants}
-          style={{
-            padding: "10px 22px",
-            borderRadius: 12,
-            background: "linear-gradient(135deg, #E8534A, #F5A67A)",
-            color: "#fff",
-            fontWeight: 600,
-            fontSize: 14,
-            textAlign: "center",
-          }}
+          className="px-[22px] py-2.5 rounded-xl text-white font-semibold text-sm text-center"
+          style={{ background: "linear-gradient(135deg, #E8534A, #E8534A)" }}
         >
           {label}
         </motion.li>

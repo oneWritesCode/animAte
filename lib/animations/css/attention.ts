@@ -6,6 +6,7 @@ export const attentionDefs: Def[] = [
     id: "pulse",
     name: "Pulse",
     category: "attention",
+    tags: ["css", "attention", "scale", "infinite", "subtle", "ui", "box"],
     infinite: true,
     keyframes: `  0%, 100% { transform: scale(1); }\n  50% { transform: scale(1.08); }`,
     duration: "1.2s",

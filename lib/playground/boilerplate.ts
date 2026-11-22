@@ -32,7 +32,7 @@ export default function App() {
           width: 72,
           height: 72,
           borderRadius: 18,
-          background: "linear-gradient(135deg, #E8534A, #F5A67A)",
+          background: "linear-gradient(135deg, #E8534A, #E8534AA)",
         }}
       />
 

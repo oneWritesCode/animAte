@@ -7,6 +7,7 @@ export const entranceDefs: Def[] = [
     name: "Fade In",
     category: "entrance",
     tag: "new",
+    tags: ["css", "entrance", "fade", "opacity", "simple", "box", "new"],
     keyframes: `  from { opacity: 0; }\n  to { opacity: 1; }`,
     classBody: box,
   },

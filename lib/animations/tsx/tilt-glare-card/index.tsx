@@ -12,22 +12,19 @@ import {
   type AnimationPlaybackControls,
 } from "framer-motion";
 
-const MAX_TILT = 16; // degrees
+const MAX_TILT = 16;
 
 export default function TiltGlareCard() {
   const cardRef = useRef<HTMLDivElement>(null);
   const idleControls = useRef<AnimationPlaybackControls[]>([]);
   const prefersReducedMotion = useReducedMotion();
 
-  // Pointer position inside the card, from 0 (left / top) to 1 (right / bottom).
   const pointerX = useMotionValue(0.5);
   const pointerY = useMotionValue(0.5);
 
-  // Tilt towards the pointer, softened by springs.
   const rotateY = useSpring(useTransform(pointerX, [0, 1], [-MAX_TILT, MAX_TILT]), { stiffness: 160, damping: 16 });
   const rotateX = useSpring(useTransform(pointerY, [0, 1], [MAX_TILT, -MAX_TILT]), { stiffness: 160, damping: 16 });
 
-  // A soft light that follows the pointer, plus a rainbow sheen that slides with it.
   const glareX = useTransform(pointerX, [0, 1], [0, 100]);
   const glareY = useTransform(pointerY, [0, 1], [0, 100]);
   const glare = useMotionTemplate`radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.65), transparent 55%)`;
@@ -66,40 +63,29 @@ export default function TiltGlareCard() {
           pointerY.set(0.5);
           if (!prefersReducedMotion) startIdle();
         }}
+        className="relative overflow-hidden rounded-[20px] text-white"
         style={{
           rotateX,
           rotateY,
           transformStyle: "preserve-3d",
-          position: "relative",
           width: 220,
           height: 140,
-          borderRadius: 20,
           background: "linear-gradient(135deg, #2D1810, #6b2a22 55%, #E8534A)",
           boxShadow: "0 24px 40px -12px rgba(45, 24, 16, 0.5)",
-          overflow: "hidden",
-          color: "#fff",
         }}
       >
-        <motion.div style={{ position: "absolute", inset: 0, background: sheen, mixBlendMode: "screen" }} />
-        <motion.div style={{ position: "absolute", inset: 0, background: glare, mixBlendMode: "overlay" }} />
+        <motion.div className="absolute inset-0 mix-blend-screen" style={{ background: sheen }} />
+        <motion.div className="absolute inset-0 mix-blend-overlay" style={{ background: glare }} />
 
-        {/* Pushed forward in 3D, so it floats above the card */}
-        <div style={{ position: "absolute", left: 18, top: 16, transform: "translateZ(40px)" }}>
-          <p style={{ margin: 0, fontSize: 11, letterSpacing: "0.18em", opacity: 0.7 }}>MEMBER</p>
-          <p style={{ margin: "4px 0 0", fontSize: 22, fontWeight: 700 }}>animAte</p>
+        {/* Pushed forward in 3D */}
+        <div className="absolute left-[18px] top-4" style={{ transform: "translateZ(40px)" }}>
+          <p className="m-0 text-[11px] tracking-[0.18em] opacity-70">MEMBER</p>
+          <p className="m-0 mt-1 text-[22px] font-bold">animAte</p>
         </div>
+
         <div
-          style={{
-            position: "absolute",
-            right: 18,
-            bottom: 16,
-            transform: "translateZ(60px)",
-            padding: "4px 10px",
-            borderRadius: 999,
-            background: "rgba(255,255,255,0.18)",
-            fontSize: 11,
-            fontWeight: 600,
-          }}
+          className="absolute right-[18px] bottom-4 px-2.5 py-1 rounded-full text-[11px] font-semibold"
+          style={{ transform: "translateZ(60px)", background: "rgba(255,255,255,0.18)" }}
         >
           ✦ PRO
         </div>

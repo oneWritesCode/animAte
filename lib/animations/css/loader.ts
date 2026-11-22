@@ -2,17 +2,17 @@ import { type Def, box, build } from "./types";
 import type { AnimationItem } from "./types";
 
 export const loaderDefs: Def[] = [
-  {
-    id: "spinner",
-    name: "Spinner",
-    category: "loaders",
-    tag: "new",
-    infinite: true,
-    duration: "0.8s",
-    easing: "linear",
-    keyframes: `  to { transform: rotate(360deg); }`,
-    classBody: `  width: 44px;\n  height: 44px;\n  border-radius: 50%;\n  border: 4px solid #FDE8E4;\n  border-top-color: #E8534A;`,
-  },
+  // {
+  //   id: "spinner",
+  //   name: "Spinner",
+  //   category: "loaders",
+  //   tag: "new",
+  //   infinite: true,
+  //   duration: "0.8s",
+  //   easing: "linear",
+  //   keyframes: `  to { transform: rotate(360deg); }`,
+  //   classBody: `  width: 44px;\n  height: 44px;\n  border-radius: 50%;\n  border: 4px solid #FDE8E4;\n  border-top-color: #E8534A;`,
+  // },
 //   {
 //     id: "dual-ring",
 //     name: "Dual Ring",

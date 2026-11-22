@@ -43,6 +43,8 @@ interface AnimationItemBase {
   category: AnimationCategory;
   /** Your cards show a "New" badge when this is set. */
   tag?: string;
+  /** Multiple searchable tags, e.g. ["css", "loader", "spinner"] */
+  tags?: string[];
   kind: PreviewKind;
   /** npm packages the snippet needs. Empty for plain CSS. */
   dependencies: string[];
@@ -80,6 +82,8 @@ export interface ComponentAnimationMeta {
   name: string;
   category: AnimationCategory;
   tag?: string; // set it only if the card should show the "New" badge
+  /** Multiple searchable tags, e.g. ["fm", "framer-motion", "entrance"] */
+  tags?: string[];
   kind?: PreviewKind; // defaults to "custom"
   dependencies: string[]; // every npm package the snippet imports (react is implied)
   previewText?: string;

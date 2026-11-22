@@ -10,9 +10,9 @@ const CARDS = [
   { title: "Nice one", note: "never runs out", from: "#B14DFF", to: "#E0A4FF" },
 ];
 
-const SWIPE_DISTANCE = 90; // px you have to drag before a swipe counts
-const FLY_OFF = 320; // px the card flies away
-const AUTOPLAY_MS = 2400;
+const SWIPE_DISTANCE = 90;
+const FLY_OFF = 320;
+const AUTOPLAY_MS = 5000;
 
 function Card({
   card,
@@ -23,7 +23,7 @@ function Card({
 }: {
   card: (typeof CARDS)[number];
   x: MotionValue<number>;
-  position: number; // 0 = on top
+  position: number;
   onSwipe: (direction: 1 | -1) => void;
   onDragStateChange: (isDragging: boolean) => void;
 }) {
@@ -43,23 +43,16 @@ function Card({
           onSwipe(info.offset.x > 0 ? 1 : -1);
         }
       }}
-      // Cards further back are smaller and sit lower, so they look stacked.
       animate={{ scale: 1 - position * 0.07, y: position * 14 }}
       transition={{ type: "spring", stiffness: 320, damping: 26 }}
+      className="absolute flex flex-col justify-end p-4 text-white rounded-[20px]"
       style={{
         x,
         rotate: isTop ? rotate : 0,
         opacity: isTop ? opacity : 1,
         zIndex: CARDS.length - position,
-        position: "absolute",
         width: 190,
         height: 112,
-        borderRadius: 20,
-        padding: 16,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-end",
-        color: "#fff",
         cursor: isTop ? "grab" : "default",
         touchAction: "pan-y",
         background: `linear-gradient(135deg, ${card.from}, ${card.to})`,
@@ -67,14 +60,13 @@ function Card({
       }}
       whileTap={isTop ? { cursor: "grabbing" } : undefined}
     >
-      <p style={{ margin: 0, fontSize: 20, fontWeight: 700 }}>{card.title}</p>
-      <p style={{ margin: "2px 0 0", fontSize: 12, opacity: 0.85 }}>{card.note}</p>
+      <p className="m-0 text-xl font-bold">{card.title}</p>
+      <p className="m-0 mt-0.5 text-xs opacity-85">{card.note}</p>
     </motion.div>
   );
 }
 
 export default function SwipeCardStack() {
-  // order[0] is the card on top.
   const [order, setOrder] = useState(() => CARDS.map((_, index) => index));
   const [offsets] = useState(() => CARDS.map(() => motionValue(0)));
   const isDragging = useRef(false);
@@ -88,19 +80,16 @@ export default function SwipeCardStack() {
   function swipeTop(direction: 1 | -1) {
     const topIndex = orderRef.current[0];
     const offset = offsets[topIndex];
-
     animate(offset, direction * FLY_OFF, {
       duration: 0.28,
       ease: "easeIn",
       onComplete: () => {
-        // Send the card to the back and put it in place, ready for its next turn.
         offset.set(0);
         setOrder((current) => [...current.slice(1), current[0]]);
       },
     });
   }
 
-  // Swipes by itself until somebody touches it, so the card always looks alive.
   useEffect(() => {
     const timer = window.setInterval(() => {
       if (isDragging.current) return;
@@ -112,7 +101,7 @@ export default function SwipeCardStack() {
   }, []);
 
   return (
-    <div style={{ position: "relative", display: "grid", placeItems: "center", width: 240, height: 150 }}>
+    <div className="relative grid place-items-center w-[240px] h-[150px]">
       {order.map((cardIndex, position) => (
         <Card
           key={cardIndex}

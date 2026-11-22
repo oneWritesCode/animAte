@@ -4,14 +4,14 @@
  *   npx tsx scripts/build-registry.ts        (or: npm run registry)
  *
  * Each animation is a folder:
- *   src/animations/<library>/<animation-name>/
+ *   lib/animations/tsx/<animation-name>/
  *     meta.ts      -> metadata (not copied by users)
  *     index.tsx    -> the component, default export (copied by users)
  *     *.css, *.ts  -> optional extra files the component imports (copied by users)
  *
  * Output:
  *   public/r/<id>.json                         code + dependencies, fetched when the code panel opens
- *   src/lib/animations/registry.generated.ts   metadata + lazy loaders for live previews (no code)
+ *   lib/animations/registry.generated.ts       metadata + lazy loaders for live previews (no code)
  */
 
 import fs from "node:fs";
@@ -30,7 +30,7 @@ const projectRoot = process.cwd();
 const sourceRoot = fs.existsSync(path.join(projectRoot, "src", "app"))
   ? path.join(projectRoot, "src")
   : projectRoot;
-const animationsDirectory = path.join(sourceRoot, "snippets");
+const animationsDirectory = path.join(sourceRoot, "lib/animations/tsx");
 const publicOutputDirectory = path.join(projectRoot, "public/r");
 const registryOutputFile = path.join(
   sourceRoot,

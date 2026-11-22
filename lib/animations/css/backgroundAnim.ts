@@ -7,6 +7,7 @@ export const backgroundDefs: Def[] = [
     name: "Aurora",
     category: "background",
     tag: "new",
+    tags: ["css", "background", "gradient", "infinite", "aurora", "bg", "ambient", "new"],
     infinite: true,
     duration: "8s",
     easing: "ease-in-out",

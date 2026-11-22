@@ -2,10 +2,9 @@
 
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
-import "./magnetic-button.css";
 
-const BUTTON_PULL = 0.35; // how far the button follows the pointer (0 to 1)
-const LABEL_PULL = 0.2; // the label moves less, which fakes depth
+const BUTTON_PULL = 0.35;
+const LABEL_PULL = 0.2;
 
 export default function MagneticButton() {
   const fieldRef = useRef<HTMLDivElement>(null);
@@ -18,12 +17,10 @@ export default function MagneticButton() {
     const label = labelRef.current;
     if (!field || !button || !label) return;
 
-    // gsap.context tracks everything created inside it, so one revert() cleans up all of it.
     const context = gsap.context(() => {
       const springOptions = { duration: 0.8, ease: "elastic.out(1, 0.45)" };
       const followOptions = { duration: 0.4, ease: "power3.out" };
 
-      // quickTo reuses a single tween, so it stays smooth on every pointermove.
       const moveButtonX = gsap.quickTo(button, "x", springOptions);
       const moveButtonY = gsap.quickTo(button, "y", springOptions);
       const moveLabelX = gsap.quickTo(label, "x", followOptions);
@@ -33,7 +30,6 @@ export default function MagneticButton() {
         const bounds = button.getBoundingClientRect();
         const offsetX = event.clientX - (bounds.left + bounds.width / 2);
         const offsetY = event.clientY - (bounds.top + bounds.height / 2);
-
         moveButtonX(offsetX * BUTTON_PULL);
         moveButtonY(offsetY * BUTTON_PULL);
         moveLabelX(offsetX * LABEL_PULL);
@@ -60,10 +56,13 @@ export default function MagneticButton() {
   }, []);
 
   return (
-    // The field is the invisible "magnetic area" around the button.
-    <div ref={fieldRef} className="magnetic-field">
-      <button ref={buttonRef} type="button" className="magnetic-button">
-        <span ref={labelRef} className="magnetic-label">
+    <div ref={fieldRef} className="grid place-items-center w-60 h-[150px]">
+      <button
+        ref={buttonRef}
+        type="button"
+        className="px-[30px] py-[14px] border-0 rounded-full bg-zinc-900 text-white text-sm font-semibold cursor-pointer"
+      >
+        <span ref={labelRef} className="inline-block">
           Hover me
         </span>
       </button>

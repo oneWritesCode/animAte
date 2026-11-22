@@ -17,7 +17,6 @@ export default function ScrambleText() {
     if (!element) return;
 
     const context = gsap.context(() => {
-      // Each phrase scrambles in, holds for a moment, then the next one takes over. Forever.
       const timeline = gsap.timeline({ repeat: -1 });
       PHRASES.forEach((phrase) => {
         timeline.to(element, {
@@ -25,7 +24,7 @@ export default function ScrambleText() {
           ease: "none",
           scrambleText: { text: phrase, chars: SCRAMBLE_CHARACTERS, revealDelay: 0.25, speed: 0.6 },
         });
-        timeline.to({}, { duration: 1.1 }); // the hold
+        timeline.to({}, { duration: 1.1 });
       });
     });
 
@@ -34,24 +33,14 @@ export default function ScrambleText() {
 
   return (
     <div
-      style={{
-        display: "grid",
-        placeItems: "center",
-        width: 260,
-        height: 150,
-        borderRadius: 20,
-        background: "#18181b",
-        boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.08)",
-      }}
+      className="grid place-items-center w-[260px] h-[150px] rounded-[20px] bg-zinc-900"
+      style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.08)" }}
     >
       <span
         ref={textRef}
+        className="font-mono text-lg font-bold tracking-[0.08em]"
         style={{
           color: "#F5A67A",
-          fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
-          fontSize: 18,
-          fontWeight: 700,
-          letterSpacing: "0.08em",
           textShadow: "0 0 18px rgba(232, 83, 74, 0.55)",
         }}
       >
