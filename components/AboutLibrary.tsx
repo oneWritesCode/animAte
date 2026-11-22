@@ -15,6 +15,7 @@ import {
 import gsap from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
 import { allAnimations } from "@/lib/animations";
+import { MagneticLetters, useMagneticField } from "./Magnetic";
 
 gsap.registerPlugin(TextPlugin);
 
@@ -60,7 +61,7 @@ const FLOATING_CHIPS = [
 /* -------------------------------------------------------------------------- */
 
 const CORAL = "#E8534A";
-const PEACH = "#F5A67A";
+const PEACH = "#E8534A";
 
 /** GSAP: three rings, spinning against each other. */
 function MiniOrbit() {
@@ -360,10 +361,10 @@ const TILES: { tone: Tone; content: ReactNode }[] = [
 
 const TONE_CLASSES: Record<Tone, string> = {
   light:
-    "bg-white border border-black/5 shadow-[0_18px_30px_-12px_rgba(45,24,16,0.3)]",
+    "bg-white border border-black/20 shadow-[0_18px_30px_-12px_rgba(45,24,16,0.3)]",
   coral:
-    "bg-gradient-to-br from-[#E8534A] to-[#F5A67A] shadow-[0_18px_30px_-12px_rgba(232,83,74,0.55)]",
-  none: "shadow-[0_18px_34px_-12px_rgba(232,83,74,0.6)]",
+    "bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary)] shadow-[0_18px_30px_-12px_var(--color-primary-light)]",
+  none: "shadow-[0_18px_34px_-12px_var(--color-primary-light)]",
 };
 
 function Tile({
@@ -492,11 +493,11 @@ function LibraryStage() {
       className="relative mx-auto aspect-square w-full max-w-[480px] [perspective:1400px]"
     >
       {/* soft light that slowly breathes behind the board */}
-      <motion.div
-        className="absolute inset-[8%] -z-10 rounded-full bg-gradient-to-br from-[#F5A67A]/60 via-[#E8534A]/25 to-transparent blur-3xl"
+      {/* <motion.div
+        className="absolute inset-[8%] -z-10 rounded-full bg-gradient-to-br from-[var(--color-primary)]/0 to-transparent blur-3xl"
         animate={{ scale: [1, 1.12, 1], opacity: [0.8, 1, 0.8] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      />
+      /> */}
 
       <motion.div
         ref={boardRef}
@@ -522,14 +523,16 @@ function LibraryStage() {
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/*  Section                                                                    */
-/* -------------------------------------------------------------------------- */
+// section
 
 export default function AboutLibrary() {
+  const AboutLibraryRef = useRef<HTMLElement>(null);
+  useMagneticField(AboutLibraryRef);
+
   return (
     <MotionConfig reducedMotion="user">
       <section
+        ref={AboutLibraryRef}
         id="about-library"
         className="relative mx-auto w-full max-w-6xl px-4 pt-10 pb-24"
       >
@@ -550,16 +553,15 @@ export default function AboutLibrary() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <p className="text-sm text-right font-semibold uppercase tracking-widest text-[var(--color-primary)]">
-              The library
+            <p className="text-lg text-right font-semibold uppercase tracking-widest text-[var(--color-primary)]">
+              <MagneticLetters text="The library" />
             </p>
-            <h2 className="mt-3 text-4xl text-right font-semibold tracking-tight text-zinc-900 sm:text-5xl">
-              Motion you can feel before you copy it.
+            <h2 className="text-4xl text-right font-semibold tracking-tight text-zinc-900 sm:text-5xl">
+              {/* Motion you can feel before you copy it. */}
+              <MagneticLetters text=" Motion you can feel before you copy it." />
             </h2>
-            <p className="mt-4 text-md text-zinc-500 text-right">
-              A growing collection of hand-built animations for buttons,
-              loaders, text, cards and backgrounds. Pick one, see it move, and
-              take it home.
+            <p className="mt-4 text-md text-zinc-500 text-right tracking-tighter">
+              <MagneticLetters text=" A growing collection of hand-built animations for buttons, loaders, text, cards and backgrounds. Pick one, see it move, and take it home." />
             </p>
 
             <ul className="mt-8 grid gap-5 sm:grid-cols-2">
@@ -579,10 +581,12 @@ export default function AboutLibrary() {
 
                   <div>
                     <p className="font-medium text-zinc-900 text-right">
-                      {feature.title}
+                      {/* {feature.title} */}
+                      <MagneticLetters text={feature.title} />
                     </p>
                     <p className="mt-0.5 text-sm leading-relaxed text-zinc-500 text-right">
-                      {feature.text}
+                      {/* {feature.text} */}
+                      <MagneticLetters text={feature.text} />
                     </p>
                   </div>
                 </li>
@@ -594,16 +598,22 @@ export default function AboutLibrary() {
                 <div key={stat.label} className="">
                   {/* <dt className="sr-only">{stat.label}</dt> */}
                   <dd className="text-2xl font-semibold tracking-tight text-zinc-900">
-                    {stat.value}
+                    {/* {stat.value} */}
+                    <MagneticLetters text={stat.value.toString()} />
                   </dd>
-                  <p className="text-xs leading-0 text-zinc-500">{stat.label}</p>
+                  <p className="text-xs leading-0 text-zinc-500">
+                    {/* {stat.label} */}
+                    <MagneticLetters text={stat.label} />
+                  </p>
                 </div>
               ))}
               <Link
                 href="/library"
-                className="inline-flex items-center gap-2 rounded-2xl bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
+                data-magnetic="block"
+                className="inline-flex items-center gap-2 rounded-2xl bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white shadow-sm hover:shadow-lg"
               >
-                Browse the library <span aria-hidden>{"->"}</span>
+                <MagneticLetters text="Browse the library" />
+                <span aria-hidden>{"->"}</span>
               </Link>
             </dl>
           </motion.div>

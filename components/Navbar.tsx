@@ -15,7 +15,7 @@ export function Navbar({ className = "" }: { className?: string }) {
         >
           {/* <PatternCraftIcon className="h-6 w-6" /> */}
           <Image src={logo} alt="animAte" className="h-6 w-6 aspect-square" />
-          <span className="text-xl font-bold tracking-tight text-gray-400 font-sans uppercase">
+          <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-[#F5A67A] to-[#D22E8C] o-[#8B7CF6]/80 bg-clip-text text-transparent font-sans uppercase">
             animAte
           </span>
         </Link>

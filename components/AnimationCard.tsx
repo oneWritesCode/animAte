@@ -36,15 +36,15 @@ export function AnimationCard({
     onCopied("CSS copied to clipboard");
   }
 
-  function open() {
-    if (item.source === "css") onOpen();
-    else router.push(playgroundHref);
-  }
+  // function open() {
+  //   if (item.source === "css") onOpen();
+  //   else router.push(playgroundHref);
+  // }
 
   return (
     <article
       className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-[28px] border border-zinc-100 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
-      onClick={open}
+      // onClick={open}
     >
       <div className={`absolute inset-0 ${darkPreview ? "bg-zinc-950" : "bg-gradient-to-b from-white to-[var(--color-surface)]"}`}>
         <div className="flex h-full items-center justify-center">

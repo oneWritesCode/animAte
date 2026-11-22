@@ -1,23 +1,66 @@
 "use client";
 
-import { useEffect, type RefObject } from "react";
+import { useEffect, useLayoutEffect, useRef, type RefObject } from "react";
 import gsap from "gsap";
 
 /* -------------------------------------------------------------------------- */
 /*  Text helpers: split text into the pieces that get pulled by the cursor     */
 /* -------------------------------------------------------------------------- */
 
-/** Every letter is its own magnet. Words stay together so a line never breaks in the middle of a word. */
-export function MagneticLetters({ text }: { text: string }) {
+/**
+ * Every letter is its own magnet. Words stay together so a line never breaks in the middle of a word.
+ *
+ * `gradient` paints one CSS gradient across the whole text, e.g.
+ *   gradient="linear-gradient(90deg, #8B7CF6, #E8534A, #F5A67A)"
+ * Putting `bg-clip-text text-transparent` on a parent does NOT work here, because every letter
+ * is its own moving layer. So each letter gets the gradient itself, sized to the whole text and
+ * shifted by its own position, which makes the letters line up as one continuous gradient.
+ */
+export function MagneticLetters({ text, gradient }: { text: string; gradient?: string }) {
+  const wrapperRef = useRef<HTMLSpanElement>(null);
   const words = text.split(" ");
+
+  useLayoutEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!gradient || !wrapper) return;
+
+    function paintGradient() {
+      const wrapperBox = wrapper!.getBoundingClientRect();
+      wrapper!.querySelectorAll<HTMLElement>("[data-magnetic='letter']").forEach((letter) => {
+        // Measure where the letter rests, ignoring the nudge the magnet effect may have applied.
+        const nudgeX = new DOMMatrix(getComputedStyle(letter).transform).m41;
+        const restingLeft = letter.getBoundingClientRect().left - nudgeX - wrapperBox.left;
+
+        letter.style.backgroundSize = `${wrapperBox.width}px 100%`;
+        letter.style.backgroundPosition = `${-restingLeft}px 0`;
+        letter.style.color = "transparent"; // only hide the normal colour once the gradient is in place
+      });
+    }
+
+    paintGradient();
+    const resizeObserver = new ResizeObserver(paintGradient);
+    resizeObserver.observe(wrapper);
+    document.fonts?.ready.then(paintGradient); // web fonts change letter widths after load
+    return () => resizeObserver.disconnect();
+  }, [gradient, text]);
+
   return (
-    <span aria-label={text}>
+    <span ref={wrapperRef} aria-label={text}>
       {words.map((word, wordIndex) => (
         <span key={wordIndex} aria-hidden="true">
           {wordIndex > 0 && " "}
           <span className="inline-block whitespace-nowrap">
             {[...word].map((letter, letterIndex) => (
-              <span key={letterIndex} data-magnetic="letter" className="inline-block will-change-transform">
+              <span
+                key={letterIndex}
+                data-magnetic="letter"
+                className="inline-block will-change-transform"
+                style={
+                  gradient
+                    ? { backgroundImage: gradient, backgroundRepeat: "no-repeat", backgroundClip: "text", WebkitBackgroundClip: "text" }
+                    : undefined
+                }
+              >
                 {letter}
               </span>
             ))}
