@@ -26,9 +26,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
       <body>
+        {/* <script
+         data-goatcounter="https://animate.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script> */}
         <Script
-          src="https://cloud.umami.is/script.js"
-          data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+          src="//gc.zgo.at/count.js"
+          data-goatcounter="https://animate.goatcounter.com/count"
           strategy="afterInteractive"
         />
         {children}
