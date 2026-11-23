@@ -74,7 +74,7 @@ class PreviewErrorBoundary extends Component<{ children: ReactNode }, { hasError
 
   render() {
     return this.state.hasError ? (
-      <p className="text-xs text-zinc-400">Preview failed to load</p>
+      <p className="text-xs">Preview failed to load</p>
     ) : (
       this.props.children
     );

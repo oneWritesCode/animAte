@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { motion, MotionConfig, useReducedMotion } from "framer-motion";
 import Blob from "@/public/svg/Blob";
@@ -8,6 +8,7 @@ import CurvedArrow from "@/public/svg/CurvedArrow";
 import MotionRays from "@/public/svg/MotionRays";
 import SmoothUnderline from "@/public/svg/SmoothUnderline";
 import Sparkle from "@/public/svg/sparkle";
+import { MagneticLetters, useMagneticField } from "./Magnetic";
 
 /* -------------------------------------------------------------------------- */
 /*  The three steps (change colours and words here)                            */
@@ -78,7 +79,7 @@ function IllustrationCard({
   children: ReactNode;
 }) {
   return (
-    <div className="relative mx-auto mt-12 w-full max-w-[320px]">
+    <div className="relative mx-auto mt-4 w-full max-w-[320px]">
       {/* <motion.div
         aria-hidden="true"
         className="absolute -inset-x-6 -inset-y-8 -z-10 backdrop-blur-2xl"
@@ -98,9 +99,7 @@ function IllustrationCard({
   );
 }
 
-/* -------------------------------------------------------------------------- */
 /*  Illustration 1: a grid of animations, a cursor picks one after another     */
-/* -------------------------------------------------------------------------- */
 
 const TILE_GRADIENTS = [
   "from-[#F5784A] to-[#F5A67A]",
@@ -185,9 +184,7 @@ function ExploreIllustration({ accent }: { accent: string }) {
   );
 }
 
-/* -------------------------------------------------------------------------- */
 /*  Illustration 2: a live preview with a progress bar                         */
-/* -------------------------------------------------------------------------- */
 
 function PreviewIllustration({ accent }: { accent: string }) {
   const loop = { duration: 5, repeat: Infinity, ease: "linear" } as const;
@@ -196,7 +193,7 @@ function PreviewIllustration({ accent }: { accent: string }) {
     <div className="relative rounded-3xl border border-white/80 bg-white/85 p-4 shadow-xl shadow-black/5 backdrop-blur">
       <div className="grid h-[104px] place-items-center rounded-2xl bg-gradient-to-b from-white to-[#faf6ff]">
         <motion.div
-          className="size-14 rounded-2xl bg-gradient-to-br from-[#FF6B6B] to-[#F5A67A] shadow-lg shadow-[#E8534A]/30"
+          className="size-14 rounded-2xl bg-gradient-to-br from-[#F5A67A] to-[#F5A67A] shadow-lg shadow-[#E8534A]/30"
           animate={{ y: [0, -10, 0], rotate: [0, 8, 0], scale: [1, 1.05, 1] }}
           transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -276,7 +273,7 @@ function CodeIllustration({ accent }: { accent: string }) {
           {copied ? "Copied" : "Copy"}
         </motion.span>
       </div>
-      <pre className="mt-4 overflow-hidden font-mono text-[12px] leading-6 text-zinc-300">
+      <pre className="mt-4 overflow-hidden font-mono text-[12px] leading-6 ">
         <span className="text-[#f07178]">{"<div "}</span>
         <span className="text-[#ffcb6b]">class</span>
         {"="}
@@ -324,33 +321,42 @@ export default function HowToUse() {
       <CodeIllustration accent={STEP_ACCENTS[2]} />
     </IllustrationCard>,
   ];
+  const HowToUseRef = useRef<HTMLElement>(null);
+  useMagneticField(HowToUseRef);
 
   return (
     <MotionConfig reducedMotion="user">
       <section
+        ref={HowToUseRef}
         id="how-it-works"
         className="relative mx-auto w-full max-w-6xl scroll-mt-24 overflow-x-clip px-4 py-24"
       >
         {/* Heading */}
         <div className="relative mx-auto mb-10 max-w-2xl text-center">
-
-          <h2 className="text-4xl font-semibold tracking-tight text-zinc-900 sm:text-6xl sm:leading-[1.05]">
-            Simple steps.
+          <h2 className="text-4xl font-semibold tracking-tight  sm:text-6xl sm:leading-[1.05]">
+            <MagneticLetters text="Simple steps." />
             <br />
-            Endless{" "}
+            <MagneticLetters text="Endless" />
+            {/* Endless{" "} */}
             <span className="relative inline-block">
-              <span className="bg-gradient-to-r from-[#8B7CF6] via-[#E8534A] to-[#F5A67A] bg-clip-text text-transparent">
-                animations.
+              <span className="bg-gradient-to-r frm-[#E8534A] from-[#F5A67A] to-[#ee4ca8] bg-clip-text text-transparent">
+                <MagneticLetters
+                  gradient="linear-gradient(90deg, #F5A67A, #ee4ca8)"
+                  text=" animations"
+                />
+                {/* animations. */}
               </span>
               <SmoothUnderline
                 className="absolute -bottom-2 left-0 h-3 w-full"
                 color="#E8534A"
+              data-magnetic="block"
               />
             </span>
           </h2>
 
-          <p className="mt-6 text-lg text-zinc-500">
-            Discover, preview and use animations in just a few clicks.
+          <p className="mt-4 text-lg ">
+            {/* Discover, preview and use animations in just a few clicks. */}
+            <MagneticLetters text="Discover, preview and use animations in just a few clicks." />
           </p>
 
           {/* <Sparkle
@@ -368,7 +374,7 @@ export default function HowToUse() {
         </div>
 
         {/* Steps */}
-        <ol className="relative flex items-center justify-center gap-40">
+        <ol className="relative flex items-center justify-around">
           {STEPS.map((step, index) => (
             <motion.li
               key={step.title}
@@ -385,20 +391,21 @@ export default function HowToUse() {
               <div className="flex items-start gap-3">
                 <span
                   className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full text-sm font-bold text-white shadow-md"
+              data-magnetic="block"
                   style={{
-                    background: `linear-gradient(135deg, var(--color-primary), var(--color-primary))`,
+                    background: `linear-gradient(135deg, var(--color-secondary) 10%, var(--color-secondary))`,
                     // background: `linear-gradient(135deg, ${STEP_ACCENTS[index]}, ${STEP_ACCENTS[index]}b3)`,
                     // boxShadow: `0 6px 14px -4px ${STEP_ACCENTS[index]}88`,
                   }}
                 >
-                  {index + 1}
+                  <MagneticLetters text={(index + 1).toString()} />
                 </span>
                 <div>
-                  <h3 className="text-xl font-semibold text-zinc-900">
-                    {step.title}
+                  <h3 className="text-xl font-semibold ">
+                    <MagneticLetters text={step.title} />
                   </h3>
-                  <p className="mt-1 max-w-[230px] text-sm leading-relaxed text-zinc-500">
-                    {step.text}
+                  <p className="mt-1 max-w-[230px] text-sm leading-relaxed ">
+                    <MagneticLetters text={step.text} />
                   </p>
                 </div>
               </div>

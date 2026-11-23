@@ -60,8 +60,8 @@ const FLOATING_CHIPS = [
 /*  Mini animations that live inside the tiles                                 */
 /* -------------------------------------------------------------------------- */
 
-const CORAL = "#E8534A";
-const PEACH = "#E8534A";
+const CORAL = "#F5A67A"; // secondary
+const PEACH = "#F0C097"; // secondary light
 
 /** GSAP: three rings, spinning against each other. */
 function MiniOrbit() {
@@ -220,10 +220,10 @@ function MiniTypewriter() {
   }, []);
 
   return (
-    <span className="font-mono text-sm font-semibold text-zinc-800">
+    <span className="font-mono text-sm font-semibold">
       <span ref={textRef}>animate</span>
       <motion.span
-        className="ml-0.5 inline-block h-4 w-0.5 translate-y-0.5 bg-[#E8534A]"
+        className={`ml-0.5 inline-block h-4 w-0.5 translate-y-0.5 ${CORAL}`}
         animate={{ opacity: [1, 0, 1] }}
         transition={{ duration: 0.9, repeat: Infinity }}
       />
@@ -239,7 +239,7 @@ function MiniHeart() {
         <motion.span
           key={side}
           className="absolute text-xs"
-          style={{ color: PEACH }}
+          style={{ color: "#fff" }}
           animate={{
             y: [0, -26],
             x: [0, side * 12],
@@ -258,7 +258,7 @@ function MiniHeart() {
       ))}
       <motion.span
         className="text-3xl"
-        style={{ color: CORAL }}
+        style={{ color: "#fff" }}
         animate={{ scale: [1, 1.28, 1, 1.18, 1] }}
         transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
       >
@@ -363,7 +363,7 @@ const TONE_CLASSES: Record<Tone, string> = {
   light:
     "bg-white border border-black/20 shadow-[0_18px_30px_-12px_rgba(45,24,16,0.3)]",
   coral:
-    "bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary)] shadow-[0_18px_30px_-12px_var(--color-primary-light)]",
+    "bg-gradient-to-br from-[var(--color-dark-pink)]/10 to-[var(--color-secondary)]/80 border border-[var(--color-secondary)]/80 shadow-[0_18px_30px_-12px_var(--color-primary-light)]",
   none: "shadow-[0_18px_34px_-12px_var(--color-primary-light)]",
 };
 
@@ -422,7 +422,7 @@ function FloatingChip({
       className={`pointer-events-none absolute ${className}`}
     >
       <motion.span
-        className="block rounded-full border border-black/5 bg-white/90 px-3 py-1.5 text-xs font-semibold text-zinc-700 shadow-lg backdrop-blur"
+        className="block rounded-full border border-black/5 bg-white/90 px-3 py-1 text-xs font-semibold shadow-md backdrop-blur"
         animate={{ y: [0, -8, 0] }}
         transition={{
           duration: 3 + depth / 10,
@@ -553,21 +553,24 @@ export default function AboutLibrary() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <p className="text-lg text-right font-semibold uppercase tracking-widest text-[var(--color-primary)]">
-              <MagneticLetters text="The library" />
+            <p className="text-lg text-right font-bold uppercase tracking-tighter">
+              <MagneticLetters
+                text="The library"
+                gradient="linear-gradient(90deg, var(--color-secondary), var(--color-secondary-light))"
+              />
             </p>
-            <h2 className="text-4xl text-right font-semibold tracking-tight text-zinc-900 sm:text-5xl">
+            <h2 className="text-4xl text-right font-semibold tracking-tighter sm:text-6xl">
               {/* Motion you can feel before you copy it. */}
               <MagneticLetters text=" Motion you can feel before you copy it." />
             </h2>
-            <p className="mt-4 text-md text-zinc-500 text-right tracking-tighter">
+            <p className="mt-4 text-md text-right tracking-tighter">
               <MagneticLetters text=" A growing collection of hand-built animations for buttons, loaders, text, cards and backgrounds. Pick one, see it move, and take it home." />
             </p>
 
             <ul className="mt-8 grid gap-5 sm:grid-cols-2">
               {FEATURES.map((feature) => (
                 <li key={feature.title} className="flex flex-row-reverse gap-3">
-                  <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-surface-alt)] text-[var(--color-primary)]">
+                  <span className="mt-1 flex h-4 aspect-square shrink-0 items-center justify-center rounded-full border border-[var(--color-primary)]/10 bg-[var(--color-secondary)]/10 text-[var(--color-pink)]">
                     <svg
                       viewBox="0 0 24 24"
                       className="h-3 w-3"
@@ -580,11 +583,11 @@ export default function AboutLibrary() {
                   </span>
 
                   <div>
-                    <p className="font-medium text-zinc-900 text-right">
+                    <p className="font-medium text-right">
                       {/* {feature.title} */}
                       <MagneticLetters text={feature.title} />
                     </p>
-                    <p className="mt-0.5 text-sm leading-relaxed text-zinc-500 text-right">
+                    <p className="mt-0.5 text-sm leading-relaxed text-right">
                       {/* {feature.text} */}
                       <MagneticLetters text={feature.text} />
                     </p>
@@ -597,11 +600,11 @@ export default function AboutLibrary() {
               {STATS.map((stat) => (
                 <div key={stat.label} className="">
                   {/* <dt className="sr-only">{stat.label}</dt> */}
-                  <dd className="text-2xl font-semibold tracking-tight text-zinc-900">
+                  <dd className="text-2xl font-semibold tracking-tight">
                     {/* {stat.value} */}
                     <MagneticLetters text={stat.value.toString()} />
                   </dd>
-                  <p className="text-xs leading-0 text-zinc-500">
+                  <p className="text-xs leading-0">
                     {/* {stat.label} */}
                     <MagneticLetters text={stat.label} />
                   </p>

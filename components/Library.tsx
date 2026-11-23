@@ -55,7 +55,8 @@ export function Library() {
         !q ||
         item.name.toLowerCase().includes(q) ||
         item.category.includes(q) ||
-        item.id.includes(q);
+        item.id.includes(q) ||
+        (item.tags ?? []).some((t) => t.toLowerCase().includes(q));
       return matchesTab && matchesQuery;
     });
   }, [query, tab, favourites]);
@@ -74,7 +75,7 @@ export function Library() {
   return (
     <section
       id="library"
-      className="relative mx-auto h-[110vh] overflow-hidden w-full max-w-6xl pt-4"
+      className="relative mx-auto overflow-hidden w-full max-w-6xl pt-4"
     >
       <style>{`${cssBundle}
 .anim-preview-loop [class^="anim-"],
@@ -82,31 +83,46 @@ export function Library() {
   animation-iteration-count: infinite;
 }`}</style>
 
-      <div className="relative z-10 mb-8">
-        <h2 className="text-3xl font-semibold tracking-tight text-zinc-900">
+      <div className="relative z-10 mb-t mt-8 ml-2">
+        <h2 className="text-3xl font-semibold tracking-tight ">
           Animation Library
         </h2>
-        <p className="mt-2 text-zinc-500">Hover to see options</p>
+        <p className="my-2 ">Hover to see options</p>
       </div>
 
       <label className="relative z-10 mb-6 block">
-        <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400">
+        <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 ">
           <SearchIcon />
         </span>
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search..."
-          className="max-w-2xl min-w-xl rounded-full bg-white py-3 pr-4 pl-11 text-sm text-zinc-800 outline-none"
+          className="max-w-2xl min-w-xl rounded-full bg-white py-3 pr-4 pl-11 text-sm  outline-none"
         />
       </label>
+      <div className="mb-6 overflow-x-auto rounded-full border border-zinc-200 bg-zinc-50 p-1">
+        <div className="flex min-w-max">
+          {categories.map((c) => (
+            <button
+              key={c.id}
+              type="button"
+              onClick={() => setTab(c.id)}
+              className={`rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap transition ${tab === c.id ? "bg-white  shadow-sm" : " hover:"
+                }`}
+            >
+              {c.label}
+            </button>
+          ))}
+        </div>
+      </div>
 
-      <p className="relative z-10 mb-4 text-sm text-zinc-400">
+      <p className="relative z-10 mb-4 text-sm ">
         {items.length}+ animations
       </p>
 
       {items.length === 0 ? (
-        <div className="relative z-10 rounded-3xl border border-dashed border-zinc-200 py-16 text-center text-zinc-500">
+        <div className="relative z-10 rounded-3xl border border-dashed border-zinc-200 py-16 text-center ">
           No animations match that filter yet.
         </div>
       ) : (
@@ -142,17 +158,17 @@ export function Library() {
           {toast}
         </div>
       ) : null}
-      <div className="absolute bottom-0 w-full z-999">
-        {/* <div className="absolute bottom-0 w-full flex items-center justify-center">
+      {/* <div className="absolute bottom-0 w-full z-999">
+        <div className="absolute bottom-0 w-full flex items-center justify-center">
           <a
             href="/library"
-            className="inline-flex items-center gap-2 rounded-[0.9rem] border border-zinc-200 bg-[var(--foreground)] px-4 py-3 text-sm font-semibold text-zinc-100 shadow-md"
+            className="inline-flex items-center gap-2 rounded-[0.9rem] border border-zinc-200 bg-[var(--foreground)] px-4 py-3 text-sm font-semibold  shadow-md"
           >
             Browse Animations {`->`}
           </a>
-        </div> */}
+        </div>
         <div className="w-full h-[20vh] bg-linear-to-b from-transparent via-background/40 to-background" />
-      </div>
+      </div> */}
     </section>
   );
 }

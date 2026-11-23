@@ -62,7 +62,7 @@ export function AnimationCard({
           e.stopPropagation();
           onToggleFavourite();
         }}
-        className={`absolute left-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border bg-white/90 text-zinc-400 shadow-sm backdrop-blur ${favourite ? "border-[var(--color-border)] text-[var(--color-secondary)]" : "border-zinc-200"}`}
+        className={`absolute left-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border bg-white/90 shadow-sm backdrop-blur ${favourite ? "border-[var(--color-border)] text-[var(--color-secondary)]" : "border-zinc-200"}`}
         aria-label={favourite ? "Remove favourite" : "Add favourite"}
       >
         <StarIcon filled={favourite} />
@@ -85,7 +85,7 @@ export function AnimationCard({
                   e.stopPropagation();
                   copyCss();
                 }}
-                className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium text-zinc-700 hover:bg-zinc-100"
+                className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium hover:bg-zinc-100"
               >
                 <CopyIcon /> Copy
               </button>
@@ -95,7 +95,7 @@ export function AnimationCard({
                   e.stopPropagation();
                   onOpen();
                 }}
-                className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium text-zinc-700 hover:bg-zinc-100"
+                className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium hover:bg-zinc-100"
               >
                 <CodeIcon /> Code
               </button>
@@ -104,7 +104,7 @@ export function AnimationCard({
             <Link
               href={playgroundHref}
               onClick={(e) => e.stopPropagation()}
-              className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium text-zinc-700 hover:bg-zinc-100"
+              className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium hover:bg-zinc-100"
             >
               <CodeIcon /> Playground
             </Link>
@@ -115,7 +115,7 @@ export function AnimationCard({
               e.stopPropagation();
               setReplayKey((k) => k + 1);
             }}
-            className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium text-zinc-700 hover:bg-zinc-100"
+            className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium hover:bg-zinc-100"
           >
             <PlayIcon /> Replay
           </button>

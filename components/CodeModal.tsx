@@ -40,13 +40,13 @@ export function CodeModal({
       >
         <div className="flex items-center justify-between border-b border-zinc-100 px-5 py-4">
           <div>
-            <p className="text-lg font-semibold text-zinc-900">{item.name}</p>
-            <p className="text-sm capitalize text-zinc-500">{item.category} animation</p>
+            <p className="text-lg font-semibold ">{item.name}</p>
+            <p className="text-sm capitalize ">{item.category} animation</p>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full p-2 text-zinc-500 hover:bg-zinc-100"
+            className="rounded-full p-2  hover:bg-zinc-100"
             aria-label="Close"
           >
             <CloseIcon />
@@ -62,14 +62,14 @@ export function CodeModal({
             <button
               type="button"
               onClick={() => setReplayKey((k) => k + 1)}
-              className="absolute right-4 top-4 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-600"
+              className="absolute right-4 top-4 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium"
             >
               Replay
             </button>
             <AnimationPreview item={item} replayKey={replayKey} />
           </div>
 
-          <div className="flex min-h-[280px] flex-col bg-zinc-950 p-4 text-zinc-100">
+          <div className="flex min-h-[280px] flex-col bg-zinc-950 p-4 ">
             <div className="mb-3 flex items-center justify-between">
               <div className="flex rounded-lg bg-zinc-900 p-1 text-sm">
                 {(["css", "html"] as const).map((t) => (
@@ -77,7 +77,7 @@ export function CodeModal({
                     key={t}
                     type="button"
                     onClick={() => setTab(t)}
-                    className={`rounded-md px-3 py-1.5 uppercase ${tab === t ? "bg-zinc-800 text-white" : "text-zinc-400"}`}
+                    className={`rounded-md px-3 py-1.5 uppercase ${tab === t ? "bg-zinc-800 text-white" : ""}`}
                   >
                     {t}
                   </button>

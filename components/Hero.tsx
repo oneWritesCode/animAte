@@ -26,21 +26,21 @@ export function Hero() {
           <a
             href="#library"
             data-magnetic="block"
-            className="mb-8 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-sm text-zinc-600 shadow-md"
+            className="mb-8 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-sm shadow-md"
           >
-            <span className="inline-flex items-center gap-1 font-medium text-zinc-800">
+            <span className="inline-flex items-center gap-1 font-medium ">
               <span className="h-1 w-1.5 rounded-full bg-emerald-500" />
               <MagneticLetters text="100+ Beautiful animations" />
             </span>
           </a>
 
           {/* Typed in Title Case by hand: CSS `capitalize` would capitalise every separate letter. */}
-          <h1 className="text-4xl font-semibold tracking-tight text-zinc-900 sm:text-6xl sm:leading-[1.05]">
+          <h1 className="text-4xl font-semibold tracking-tight  sm:text-6xl sm:leading-[1.05]">
             <MagneticLetters text="Make Your Components Lively By Using" />
-            <span className="mt-1 block bg-gradient-to-r from-[#8B7CF6] via-[#E8534A] to-[#F5A67A] bg-clip-text text-transparent">
+            <span className="mt-1 block">
               <MagneticLetters
                 text="Animation Snippets"
-                gradient="linear-gradient(90deg, #8B7CF6, #E8534A, #F5A67A)"
+                gradient="linear-gradient(90deg, #F5A67A, #ee4ca8)"
               />
               {/* <SmoothUnderline />{" "} */}
               <SmoothUnderline
@@ -51,7 +51,7 @@ export function Hero() {
             </span>
           </h1>
 
-          <p className="mt-6 max-w-xl text-base leading-7 text-zinc-500 sm:text-lg">
+          <p className="mt-6 max-w-xl text-base leading-7  sm:text-lg">
             <MagneticLetters text="A goated library of ready-to-use animations. Preview them live, peek at the code, and copy it into your project in one click." />
           </p>
 
@@ -72,10 +72,10 @@ export function Hero() {
               <span className="font-mono text-xs">{"</>"}</span>
               <MagneticLetters text="Browse Animations" />
             
-            <MotionRays
+            {/* <MotionRays
               className="absolute -right-4 -top-4 w-6 -scale-x-100 rotate-90"
               color="#8B7CF6"
-            />
+            /> */}
             </Link>
           </div>
         </div>

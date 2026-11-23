@@ -7,7 +7,7 @@
  */
 export function FloatingBlobs() {
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden 0">
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-60">
       {/* ── TOP-LEFT corner blob — coral red ── */}
       <div
         className="blob blob-1"

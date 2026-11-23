@@ -52,7 +52,7 @@ export default function Footer() {
   // const year = new Date().getFullYear();
 
   return (
-    <footer className="relative isolate mt-24 min-h-[620px] overflow-hidden bg-gradient-to-b from-[var(--background)] via-[var(--color-primary)]/30 to-[var(--color-primary)]/90 text-[#20212a]">
+    <footer className="relative isolate mt-24 min-h-[620px] overflow-hidden bg-gradient-to-b from-[var(--background)] via-[var(--color-pink)]/10 to-[var(--color-pink)] text-[#20212a]">
       {/* Soft light near the top keeps the content area calm. */}
       <div
         aria-hidden="true"

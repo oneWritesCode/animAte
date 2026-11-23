@@ -31,9 +31,9 @@ const STACK = ["React", "GSAP", "Framer Motion", "Tailwind"];
 function PlaygroundMock() {
   return (
     <div className="relative">
-      <div className="absolute -inset-6 -z-10 rounded-[40px] bg-gradient-to-br from-[var(--color-primary)]/20 to-transparent blur-2xl" />
+      {/* <div className="absolute -inset-6 -z-10 rounded-[40px] bg-gradient-to-br from-[var(--color-primary)]/20 to-transparent blur-2xl" /> */}
 
-      <div className="overflow-hidden rounded-3xl border border-black/10 bg-[#1c1411] shadow-2xl">
+      <div className="overflow-hidden rounded-3xl border border-black/10 bg-[#1c1411] -2xl">
         <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
           <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
@@ -42,7 +42,7 @@ function PlaygroundMock() {
             index.tsx
           </span>
         </div>
-        <pre className="min-h-[300px] overflow-hidden p-5 pr-40 font-mono text-[12.5px] leading-6 text-zinc-300">
+        <pre className="min-h-[300px] overflow-hidden p-5 pr-40 font-mono text-[12.5px] leading-6">
           <span className="text-[#c792ea]">import</span>
           {" { motion } "}
           <span className="text-[#c792ea]">from</span>
@@ -67,16 +67,16 @@ function PlaygroundMock() {
       </div>
 
       {/* floating preview window */}
-      <div className="absolute -bottom-6 right-2 w-44 overflow-hidden rounded-[1.2rem] bg-[#EDE9E9] p-0.5 shadow-xl sm:-right-6 sm:w-52">
-        <p className="px-3 pb-1 pt-2 text-xs text-zinc-600">Animation</p>
-        <div className="flex h-36 items-end justify-center rounded-b-[1.1rem] border border-black/10 bg-[var(--background)] pb-6">
+      <div className="absolute -bottom-6 right-2 w-44 overflow-hidden rounded-[1.2rem] bg-white p-1 shadow-xl sm:-right-6 sm:w-52">
+        <p className="px-3 pb-1 pt-2 text-xs">Animation</p>
+        <div className="flex h-36 items-end justify-center rounded-b-[1.1rem] border border-black/10 bg-gradient-to-b from-white to-[#faf6ff] pb-6">
           <motion.div
-            className="h-14 w-14 rounded-2xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)]"
+            className="h-14 w-14 rounded-2xl bg-gradient-to-br from-[var(--color-secondary)]/80 to-[var(--color-secondary)]"
             animate={{ y: [0, -44, 0] }}
             transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
           />
         </div>
-        <span className="absolute bottom-1 right-1 h-3 w-3 cursor-nwse-resize rounded-sm border-b-2 border-r-2 border-zinc-400" />
+        <span className="absolute bottom-1 right-1 h-3 w-3 cursor-nwse-resize rounded-sm border-b-2 border-r-2 border-transparent" />
       </div>
     </div>
   );
@@ -99,17 +99,20 @@ export default function AboutPlayground() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <p className="text-lg font-semibold uppercase tracking-widest text-[var(--color-primary)]">
-              <MagneticLetters text="The playground" />
+            <p className="text-lg font-bold uppercase tracking-tighter">
+              <MagneticLetters
+                text="The playground"
+                gradient="linear-gradient(90deg, var(--color-secondary), var(--color-secondary-light))"
+              />
             </p>
-            <h2 className="text-4xl font-semibold tracking-tight text-zinc-900 sm:text-5xl">
+            <h2 className="text-4xl font-semibold tracking-tighter sm:text-6xl">
               {/* Don&apos;t just copy it. Understand it. */}
               <MagneticLetters text="Don't just copy it. Understand it." />
             </h2>
-            <p className="mt-4 text-md text-zinc-500">
+            <p className="mt-4 text-md">
               <MagneticLetters text="Real animations can be long. Open any gsap or framer-motion animation in the playground, read how it works, tweak the values, and see the result immediately." />
             </p>
-            {/* <p className="mt-4 text-md text-zinc-500">
+            {/* <p className="mt-4 text-md">
               Real animations can be long. Open any gsap or framer-motion animation in the playground, read how it works,
               tweak the values, and see the result immediately.
             </p> */}
@@ -117,7 +120,7 @@ export default function AboutPlayground() {
             <ul className="mt-8 grid gap-5 sm:grid-cols-2">
               {FEATURES.map((feature) => (
                 <li key={feature.title} className="flex gap-3">
-                  <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-surface-alt)] text-[var(--color-primary)]">
+                  <span className="mt-1 flex h-4 aspect-square shrink-0 items-center justify-center rounded-full border border-[var(--color-primary)]/10 bg-[var(--color-secondary)]/10 text-[var(--color-pink)]">
                     <svg
                       viewBox="0 0 24 24"
                       className="h-3 w-3"
@@ -129,10 +132,10 @@ export default function AboutPlayground() {
                     </svg>
                   </span>
                   <div>
-                    <p className="font-medium text-zinc-900">
+                    <p className="font-medium">
                       <MagneticLetters text={feature.title} />
                     </p>
-                    <p className="mt-0.5 text-sm leading-relaxed text-zinc-500">
+                    <p className="mt-0.5 text-sm leading-relaxed">
                       <MagneticLetters text={feature.text} />
                     </p>
                   </div>
@@ -144,7 +147,7 @@ export default function AboutPlayground() {
               {STACK.map((name) => (
                 <span
                   key={name}
-                  className="rounded-full border border-[var(--color-border)] bg-white px-3 py-1 text-xs font-medium text-zinc-600"
+                  className="rounded-full border border-[var(--color-secondary)]/40 bg-transparent px-3 py-1 text-xs"
                 >
                   {/* {name} */}
                   <MagneticLetters text={name} />
@@ -155,9 +158,10 @@ export default function AboutPlayground() {
             <Link
               href="/playground"
               data-magnetic="block"
-              className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white shadow-sm hover:shadow-lg"
+              className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white"
             >
               <MagneticLetters text="Open the playground" />
+              {"->"}
             </Link>
           </motion.div>
 
