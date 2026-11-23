@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../public/images/logo.png";
+import VisitorCount from "./VisitorsCount";
 
 export function Navbar({ className = "" }: { className?: string }) {
   return (
@@ -11,15 +12,15 @@ export function Navbar({ className = "" }: { className?: string }) {
         {/* Brand / Logo */}
         <Link
           href="/"
-          className="flex items-center gap-1.5 text-zinc-900 transition-opacity hover:opacity-90"
+          className="flex items-center gap-1.5  transition-opacity hover:opacity-90"
         >
           {/* <PatternCraftIcon className="h-6 w-6" /> */}
           <Image src={logo} alt="animAte" className="h-6 w-6 aspect-square" />
-          <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-[#F5A67A] to-[#D22E8C] o-[#8B7CF6]/80 bg-clip-text text-transparent font-sans uppercase">
+          <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-[#F5A67A] to-[#ee4ca8] o-[#8B7CF6]/80 bg-clip-text text-transparent font-sans uppercase">
             animAte
           </span>
         </Link>
-        <div className="flex items-center gap-4 text-zinc-800 capitalize text-sm">
+        <div className="flex items-center gap-4  capitalize text-sm">
           <div className="cursor-pointer hover:scale-105 hover:text-black hover:font-medium transition duration-300">
             <a href="/playground">playground</a>
           </div>
@@ -37,38 +38,16 @@ export function Navbar({ className = "" }: { className?: string }) {
           </div>
         </div>
         {/* Social Icons */}
-        <div className="flex items-center gap-4 text-zinc-800">
-          {/* <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-5 aspect-square rounded-lg text-zinc-800 transition hover:bg-zinc-100 hover:text-zinc-950"
-            aria-label="Twitter"
-          >
-            <svg
-              viewBox="0 0 50 50"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className={className}
-            >
-              <path
-                d="M42.7042 0.5L25.3854 19.0729M2.04583 44.1L19.3521 25.5417M33.3542 44.1L0.5 0.5H11.3958L44.25 44.1H33.3542Z"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="3.6"
-              />
-            </svg>
-          </a> */}
-          <div className="text-sm text-zinc-600 rounded-[0.75rem] border-2 border-gray-200 shadow-md px-3 py-1.5 bg-white">
-            20 visitors
+        <div className="flex items-center gap-4 ">
+          <div className="text-sm rounded-[0.75rem] border-2 border-gray-200 shadow-md px-3 py-1.5 bg-white">
+            <VisitorCount />
           </div>
-          <div className="flex items-center justify-center text-sm text-zinc-600 rounded-[0.75rem] border-2 border-gray-200 shadow-md px-2 py-2 bg-white">
+          <div className="flex items-center justify-center text-sm rounded-[0.75rem] border-2 border-gray-200 shadow-md px-2 py-2 bg-white">
             <a
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-4 aspect-square text-zinc-800 transition hover:bg-zinc-100 hover:text-zinc-950"
+              className="w-4 aspect-square  transition hover:bg-zinc-100 hover:"
               aria-label="GitHub"
             >
               <svg
