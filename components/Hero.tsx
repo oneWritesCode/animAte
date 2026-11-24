@@ -23,7 +23,7 @@ export function Hero() {
         className="min-h-[100vh] flex flex-col items-center relative overflow-hidden z-10"
       >
         <div className="relative mx-auto min-h-screen flex max-w-3xl flex-col items-center justify-center text-center z-10">
-          <a
+          <Link
             href="#library"
             data-magnetic="block"
             className="mb-8 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-sm shadow-md"
@@ -32,7 +32,7 @@ export function Hero() {
               <span className="h-1 w-1.5 rounded-full bg-emerald-500" />
               <MagneticLetters text="100+ Beautiful animations" />
             </span>
-          </a>
+          </Link>
 
           {/* Typed in Title Case by hand: CSS `capitalize` would capitalise every separate letter. */}
           <h1 className="text-4xl font-semibold tracking-tight  sm:text-6xl sm:leading-[1.05]">

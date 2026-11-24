@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef } from "react";
 import { MotionConfig } from "framer-motion";
 import { Mail } from "lucide-react";
@@ -73,7 +74,7 @@ export default function Sponsors() {
         <div className="mt-8 text-center">
           <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-4">
             {Array.from({ length: WALL_SLOTS }, (_, slot) => (
-              <a
+              <Link
                 key={slot}
                 href={SPONSOR_URL}
                 target="_blank"
@@ -81,7 +82,7 @@ export default function Sponsors() {
                 className={SLOT_CLASSES}
               >
                 {slot === 0 ? "Your logo here" : "+"}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -93,7 +94,7 @@ export default function Sponsors() {
 
           <div className="flex flex-wrap justify-center gap-4">
             {/* One link per button. The X icon is inside it, not a second link. */}
-            <a
+            <Link
               href={X_URL}
               target="_blank"
               rel="noopener noreferrer"
@@ -102,9 +103,9 @@ export default function Sponsors() {
             >
               <XIcon />
               <MagneticLetters text="Twitter / X" />
-            </a>
+            </Link>
 
-            <a
+            <Link
               href={`mailto:${CONTACT_EMAIL}`}
               data-magnetic="block"
               className={`${CONTACT_BUTTON_CLASSES} border border-black/20`}
@@ -115,7 +116,7 @@ export default function Sponsors() {
                 aria-hidden="true"
               />
               <MagneticLetters text="Email" />
-            </a>
+            </Link>
           </div>
         </div>
       </section>

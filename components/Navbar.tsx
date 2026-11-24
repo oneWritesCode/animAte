@@ -22,19 +22,19 @@ export function Navbar({ className = "" }: { className?: string }) {
         </Link>
         <div className="flex items-center gap-4  capitalize text-sm">
           <div className="cursor-pointer hover:scale-105 hover:text-black hover:font-medium transition duration-300">
-            <a href="/playground">playground</a>
+            <Link href="/playground">playground</Link>
           </div>
           <div className="cursor-pointer hover:scale-105 hover:text-black hover:font-medium transition duration-300">
-            <a href="/library">library</a>
+            <Link href="/library">library</Link>
           </div>
           <div className="cursor-pointer hover:scale-105 hover:text-black hover:font-medium transition duration-300">
-            <a
+            <Link
               href="https://github.com/onewritescode/animate"
               target="_blank"
               rel="noopener noreferrer"
             >
               contribution
-            </a>
+            </Link>
           </div>
         </div>
         {/* Social Icons */}
@@ -43,7 +43,7 @@ export function Navbar({ className = "" }: { className?: string }) {
             <VisitorCount />
           </div>
           <div className="flex items-center justify-center text-sm rounded-[0.75rem] border-2 border-gray-200 shadow-md px-2 py-2 bg-white">
-            <a
+            <Link
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -64,7 +64,7 @@ export function Navbar({ className = "" }: { className?: string }) {
                   strokeLinejoin="round"
                 />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </nav>

@@ -6,7 +6,7 @@ import { allAnimations } from "@/lib/animations";
 import type { AnimationCategory, CssAnimationItem } from "@/lib/types";
 import { AnimationCard } from "./AnimationCard";
 import { CodeModal } from "./CodeModal";
-import { HeartIcon, SearchIcon } from "./icons";
+import { SearchIcon } from "./icons";
 
 const STORAGE_KEY = "ilove-animations-favourites";
 
@@ -143,32 +143,12 @@ export function Library() {
       {active ? (
         <CodeModal item={active} onClose={() => setActive(null)} />
       ) : null}
-      {/* a fixed heart in the right bottm corner */}
-      {/* <button
-        type="button"
-        onClick={() => setTab("favourites")}
-        className="fixed right-5 bottom-5 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-[var(--color-border)] bg-white text-[var(--color-primary)] shadow-lg"
-        aria-label="Open favourites"
-      >
-        <HeartIcon />
-      </button> */}
 
       {toast ? (
         <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full bg-zinc-950 px-4 py-2 text-sm text-white shadow-lg">
           {toast}
         </div>
       ) : null}
-      {/* <div className="absolute bottom-0 w-full z-999">
-        <div className="absolute bottom-0 w-full flex items-center justify-center">
-          <a
-            href="/library"
-            className="inline-flex items-center gap-2 rounded-[0.9rem] border border-zinc-200 bg-[var(--foreground)] px-4 py-3 text-sm font-semibold  shadow-md"
-          >
-            Browse Animations {`->`}
-          </a>
-        </div>
-        <div className="w-full h-[20vh] bg-linear-to-b from-transparent via-background/40 to-background" />
-      </div> */}
     </section>
   );
 }

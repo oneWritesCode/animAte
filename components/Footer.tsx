@@ -1,4 +1,4 @@
-import React from "react";
+import Link from "next/link";
 
 type FooterLink = {
   label: string;
@@ -62,7 +62,7 @@ export default function Footer() {
       <div className="relative mb-8 z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-14 pb-56 pt-24 lg:grid-cols-[1.55fr_repeat(4,minmax(0,1fr))] lg:gap-10 lg:pb-64 lg:pt-28">
         {/* Brand / short message */}
         <div className="flex flex-col items-start">
-          <a
+          <Link
             href="/"
             aria-label="AnimAte home"
             className="text-4xl font-semibold uppercase leading-[0.8] tracking-[-0.055em] transition-opacity hover:opacity-75"
@@ -70,7 +70,7 @@ export default function Footer() {
             Make it move.
             <br />
             Make it yours<span className="text-[var(--color-primary)]">.</span>
-          </a>
+          </Link>
 
           <div className="mt-12 space-y-1.5 text-xs leading-relaxed text-[#65748a]">
             <p>© 2026 AnimAte. All rights reserved.</p>
@@ -90,12 +90,12 @@ export default function Footer() {
             <ul className="space-y-2">
               {column.links.map((link) => (
                 <li key={link.label}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-xs text-[#65748a] transition-colors duration-200 hover:text-[#20212a]"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
