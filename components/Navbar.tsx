@@ -39,7 +39,7 @@ export function Navbar({ className = "" }: { className?: string }) {
         </div>
         {/* Social Icons */}
         <div className="flex items-center gap-4 ">
-          <div className="text-sm rounded-[0.75rem] border-2 border-gray-200 shadow-md px-3 py-1.5 bg-white">
+          <div className="text-sm rounded-[0.75rem] border-2 border-black/10 shadow-md px-3 py-1.5 bg-white">
             <VisitorCount />
           </div>
           <div className="flex items-center justify-center text-sm rounded-[0.75rem] border-2 border-gray-200 shadow-md px-2 py-2 bg-white">
@@ -47,7 +47,7 @@ export function Navbar({ className = "" }: { className?: string }) {
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-4 aspect-square  transition hover:bg-zinc-100 hover:"
+              className="w-4 aspect-square transition"
               aria-label="GitHub"
             >
               <svg

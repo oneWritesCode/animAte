@@ -27,12 +27,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body>
         {/* <script
-         data-goatcounter="https://animate.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script> */}
-        <Script
+          data-goatcounter="https://animate.goatcounter.com/count"
+          async
           src="//gc.zgo.at/count.js"
+        ></script> */}
+        <Script
           data-goatcounter="https://animate.goatcounter.com/count"
           strategy="afterInteractive"
+          src="//gc.zgo.at/count.js"
         />
         {children}
       </body>
