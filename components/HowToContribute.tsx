@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion, MotionConfig } from "framer-motion";
 
 const REPO_URL = "https://github.com/onewritescode/animate";
@@ -35,22 +36,22 @@ function ContributionPreview() {
   return (
     <div className="space-y-4">
       <div className="rounded-3xl border border-[var(--color-border)] bg-white p-5 shadow-sm">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-400">Your folder</p>
-        <pre className="font-mono text-[13px] leading-6 text-zinc-600">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wider ">Your folder</p>
+        <pre className="font-mono text-[13px] leading-6">
           {"snippets/\n└─ gsap/\n   └─ "}
           <span className="font-semibold text-[var(--color-primary)]">my-animation/</span>
           {"\n      ├─ index.tsx   "}
-          <span className="text-zinc-400">← the component</span>
+          <span className="">← the component</span>
           {"\n      ├─ meta.ts     "}
-          <span className="text-zinc-400">← name, category…</span>
+          <span className="">← name, category…</span>
           {"\n      └─ styles.css  "}
-          <span className="text-zinc-400">← optional</span>
+          <span className="">← optional</span>
         </pre>
       </div>
 
       <div className="overflow-hidden rounded-3xl bg-[#1c1411] shadow-xl">
         <p className="border-b border-white/10 px-5 py-3 font-mono text-xs text-white/60">meta.ts</p>
-        <pre className="overflow-x-auto p-5 font-mono text-[12.5px] leading-6 text-zinc-300">
+        <pre className="overflow-x-auto p-5 font-mono text-[12.5px] leading-6 ">
           <span className="text-[#c792ea]">export default</span>
           {" {\n  "}
           <span className="text-[#ffcb6b]">id</span>
@@ -83,10 +84,10 @@ export default function HowToContribute() {
       <section id="contribute" className="relative mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-24">
         <div className="mx-auto mb-14 max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-[var(--color-primary)]">Open source</p>
-          <h2 className="mt-3 text-4xl font-semibold tracking-tight text-zinc-900 sm:text-5xl">
+          <h2 className="mt-3 text-4xl font-semibold tracking-tight  sm:text-5xl">
             Built by the community, for the community
           </h2>
-          <p className="mt-4 text-lg text-zinc-500">
+          <p className="mt-4 text-lg ">
             Got an animation you&apos;re proud of? Adding it takes one folder and one pull request.
           </p>
         </div>
@@ -108,18 +109,18 @@ export default function HowToContribute() {
                     {index + 1}
                   </span>
                   <div className="pt-1.5">
-                    <h3 className="text-lg font-semibold text-zinc-900">{step.title}</h3>
-                    <p className="mt-1 leading-relaxed text-zinc-500">{step.text}</p>
+                    <h3 className="text-lg font-semibold ">{step.title}</h3>
+                    <p className="mt-1 leading-relaxed ">{step.text}</p>
                   </div>
                 </motion.li>
               ))}
             </ol>
 
             <div className="mt-10 rounded-3xl bg-[var(--color-surface-alt)] p-6">
-              <p className="mb-3 font-semibold text-zinc-900">Before you open the PR</p>
+              <p className="mb-3 font-semibold ">Before you open the PR</p>
               <ul className="space-y-2">
                 {CHECKLIST.map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 text-sm text-zinc-600">
+                  <li key={item} className="flex items-start gap-2.5 text-sm">
                     <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary)]" fill="none" stroke="currentColor" strokeWidth="3">
                       <path d="m5 12 5 5 9-10" />
                     </svg>
@@ -130,22 +131,22 @@ export default function HowToContribute() {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <a
+              <Link
                 href={REPO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-2xl bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
               >
                 View on GitHub <span aria-hidden>↗</span>
-              </a>
-              <a
+              </Link>
+              <Link
                 href={`${REPO_URL}/blob/main/README.md`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-2xl border border-[var(--color-border)] bg-white px-6 py-3 text-sm font-semibold text-zinc-800 transition hover:bg-[var(--color-surface)]"
+                className="inline-flex items-center gap-2 rounded-2xl border border-[var(--color-border)] bg-white px-6 py-3 text-sm font-semibold  transition hover:bg-[var(--color-surface)]"
               >
                 Read the guide
-              </a>
+              </Link>
             </div>
           </div>
 

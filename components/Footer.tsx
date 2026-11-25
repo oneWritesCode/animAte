@@ -14,19 +14,26 @@ const footerColumns: FooterColumn[] = [
   {
     title: "PRODUCT",
     links: [
-      { label: "Explore animations", href: "#animations" },
-      { label: "Categories", href: "#categories" },
+      { label: "Explore animations", href: "/library" },
+      { label: "playground", href: "/playground" },
       { label: "How it works", href: "#how-it-works" },
-      // { label: "What's new", href: "#updates" },
     ],
   },
   {
     title: "CONTRIBUTE",
     links: [
-      // { label: "Submit an animation", href: "https://github.com/onewritescode/animAte" },
-      { label: "Contribution guide", href: "https://github.com/onewritescode/animAte" },
-      { label: "Request an animation", href: "https://github.com/onewritescode/animAte/issues" },
-      { label: "Report an issue", href: "https://github.com/onewritescode/animAte/issues" },
+      {
+        label: "Contribution guide",
+        href: "https://github.com/onewritescode/animAte",
+      },
+      {
+        label: "Request an animation",
+        href: "https://github.com/onewritescode/animAte/issues",
+      },
+      {
+        label: "Report an issue",
+        href: "https://github.com/onewritescode/animAte/issues",
+      },
     ],
   },
   {
@@ -35,7 +42,6 @@ const footerColumns: FooterColumn[] = [
       { label: "GitHub", href: "https://github.com/onewritescode" },
       { label: "X / Twitter", href: "https://x.com/triordeep" },
       { label: "LinkedIn", href: "https://linkedin.com/in/" },
-      // { label: "Email", href: "mailto:triordeep@gmail.com" },
     ],
   },
   {
@@ -52,12 +58,11 @@ export default function Footer() {
   // const year = new Date().getFullYear();
 
   return (
-    <footer className="relative isolate mt-24 min-h-[620px] overflow-hidden bg-gradient-to-b from-[var(--background)] via-[var(--color-pink)]/10 to-[var(--color-pink)] text-[#20212a]">
-      {/* Soft light near the top keeps the content area calm. */}
-      <div
-        aria-hidden="true"
-        // className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_5%,rgba(255,226,218,0.48),transparent_48%)]"
-      />
+    <footer className="relative isolate mt-24 min-h-[620px] overflow-hidden bg-gradient-to-b from-[var(--background)] via-[var(--color-secondary)]/10 to-[var(--color-secondary)] text-[#20212a]">
+      {/* <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_5%,rgba(255,226,218,0.48),transparent_48%)]"
+        /> */}
 
       <div className="relative mb-8 z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-14 pb-56 pt-24 lg:grid-cols-[1.55fr_repeat(4,minmax(0,1fr))] lg:gap-10 lg:pb-64 lg:pt-28">
         {/* Brand / short message */}
@@ -75,15 +80,20 @@ export default function Footer() {
           <div className="mt-12 space-y-1.5 text-xs leading-relaxed text-[#65748a]">
             <p>© 2026 AnimAte. All rights reserved.</p>
             <p>
-              Made with <span className="text-[var(--color-primary)]">{"♥"}</span> for the love of
-              motion.
+              Made with{" "}
+              <span className="text-[var(--color-primary)]">{"♥"}</span> for the
+              love of motion.
             </p>
           </div>
         </div>
 
         {/* Footer navigation */}
         {footerColumns.map((column) => (
-          <nav key={column.title} aria-label={column.title} className="text-center">
+          <nav
+            key={column.title}
+            aria-label={column.title}
+            className="text-center"
+          >
             <h2 className="mb-4 text-sm font-bold tracking-[0.1em] ">
               {column.title}
             </h2>

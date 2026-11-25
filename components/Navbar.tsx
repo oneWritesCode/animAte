@@ -39,12 +39,13 @@ export function Navbar({ className = "" }: { className?: string }) {
         </div>
         {/* Social Icons */}
         <div className="flex items-center gap-4 ">
-          <div className="text-sm rounded-[0.75rem] border-2 border-black/10 shadow-md px-3 py-1.5 bg-white">
+          <div className="text-sm rounded-[0.75rem] flex gap-1.5 items-center justify-center border-2 border-black/10 shadow-md px-3 py-1.5 bg-white">
+           <div className="size-2 bg-green-400 border border-green-500 rounded-full animate-pulse"></div>
             <VisitorCount />
           </div>
           <div className="flex items-center justify-center text-sm rounded-[0.75rem] border-2 border-gray-200 shadow-md px-2 py-2 bg-white">
             <Link
-              href="https://github.com"
+              href="https://github.com/onewritescode/animate"
               target="_blank"
               rel="noopener noreferrer"
               className="w-4 aspect-square transition"

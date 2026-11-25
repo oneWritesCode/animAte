@@ -329,7 +329,7 @@ export default function HowToUse() {
       <section
         ref={HowToUseRef}
         id="how-it-works"
-        className="relative mx-auto w-full max-w-6xl scroll-mt-24 overflow-x-clip px-4 py-24"
+        className="relative mx-auto w-full max-w-6xl scroll-mt-24 overflow-x-clip px-4 pt-10 pb-24"
       >
         {/* Heading */}
         <div className="relative mx-auto mb-10 max-w-2xl text-center">
@@ -355,22 +355,8 @@ export default function HowToUse() {
           </h2>
 
           <p className="mt-4 text-lg ">
-            {/* Discover, preview and use animations in just a few clicks. */}
             <MagneticLetters text="Discover, preview and use animations in just a few clicks." />
           </p>
-
-          {/* <Sparkle
-            className="absolute -left-4 top-24 hidden w-6 sm:block"
-            color="#F5A67A"
-          />
-          <Sparkle
-            className="absolute -right-2 top-10 hidden w-5 sm:block"
-            color="#8B7CF6"
-          />
-          <Sparkle
-            className="absolute -right-10 top-44 hidden w-3.5 sm:block"
-            color="#F5A67A"
-          /> */}
         </div>
 
         {/* Steps */}
