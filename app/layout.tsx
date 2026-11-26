@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import PageLoader from "@/components/PageLoader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "animAte — a animation library",
+  title: "animAte - a animation library",
   description:
     "Browse a hundreds of animations, preview them live, and copy the code into your projects.",
 };
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           strategy="afterInteractive"
           src="//gc.zgo.at/count.js"
         />
+        <PageLoader />
         {children}
       </body>
     </html>

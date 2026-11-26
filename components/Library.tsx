@@ -131,8 +131,8 @@ export function Library() {
             <AnimationCard
               key={item.id}
               item={item}
-              favourite={favourites.includes(item.id)}
-              onToggleFavourite={() => toggleFavourite(item.id)}
+              // favourite={favourites.includes(item.id)}
+              // onToggleFavourite={() => toggleFavourite(item.id)}
               onOpen={() => item.source === "css" && setActive(item)}
               onCopied={copied}
             />

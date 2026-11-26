@@ -1,21 +1,27 @@
 "use client";
 
-import Link from "next/link";
 import { useRef } from "react";
 import { MotionConfig } from "framer-motion";
 import { Mail } from "lucide-react";
+import { SPONSORS, type Sponsor } from "@/lib/sponsors";
 import { MagneticLetters, useMagneticField } from "./Magnetic";
+import Image from "next/image";
+import Link from "next/link";
 
 // Point this at wherever you collect sponsorships (GitHub Sponsors, Open Collective, Ko-fi, Stripe link…).
 const SPONSOR_URL = "https://github.com/sponsors/onewritescode";
 const X_URL = "https://x.com/triordeep";
-const CONTACT_EMAIL = "hello@deepak.coding78@gmail.com";
+const CONTACT_EMAIL = "deepak.coding78@gmail.com";
 
-// The first slot invites a sponsor; the rest are empty. Replace a slot's text with a logo <img> when you have one.
-const WALL_SLOTS = 2;
+// Every wall tile has the same size, so sponsors and the "join" tile line up.
+const TILE_CLASSES =
+  "flex h-35 w-35 flex-col items-center justify-center gap-2 rounded-2xl p-3 text-center";
 
-const SLOT_CLASSES =
-  "flex h-35 aspect-square items-center justify-center rounded-2xl border border-dashed border-black/50 text-xs transition-all duration-800 hover:border-2 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]";
+const JOIN_TILE_CLASSES =
+  "border border-dashed border-black/50 text-xs transition-all duration-800 hover:border-2 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]";
+
+const SPONSOR_TILE_CLASSES =
+  "border border-black/10 bg-white shadow-sm transition-colors duration-300 hover:border-[var(--color-primary)]";
 
 const CONTACT_BUTTON_CLASSES =
   "mt-8 inline-flex items-center gap-3 rounded-xl px-6 py-2 text-sm font-semibold";
@@ -40,9 +46,47 @@ function XIcon() {
   );
 }
 
+/** One sponsor: logo above, name below, the whole card links to the brand's site. */
+function SponsorTile({ sponsor }: { sponsor: Sponsor }) {
+  return (
+    <Link
+      href={sponsor.url}
+      target="_blank"
+      // "sponsored" tells search engines this link comes from a sponsorship.
+      rel="noopener noreferrer sponsored"
+      data-magnetic="block"
+      aria-label={`${sponsor.name} (opens their website)`}
+      // className={`${TILE_CLASSES} ${SPONSOR_TILE_CLASSES}`}
+    >
+      {/* A plain <img> accepts any logo source, so no next.config image rules are needed. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      {/* <Image
+        src={sponsor.logo}
+        alt="sponsors logo"
+        // width={12}
+        loading="lazy"
+        className="w-100 object-contain"
+      /> */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={sponsor.logo}
+        alt=""
+        loading="lazy"
+        className="max-h-14 w-auto max-w-full object-contain"
+      />
+      {/* <Image alt="sponsors-logo" src={sponsor.logo}/> */}
+      <span className="w-full truncate text-xs font-medium text-zinc-700">
+        {sponsor.name}
+      </span>
+    </Link>
+  );
+}
+
 export default function Sponsors() {
   const sponsorsRef = useRef<HTMLElement>(null);
   useMagneticField(sponsorsRef);
+
+  const hasSponsors = SPONSORS.length > 0;
 
   return (
     <MotionConfig reducedMotion="user">
@@ -57,7 +101,6 @@ export default function Sponsors() {
             <MagneticLetters text="Sponsors" />
           </h2>
 
-          {/* Long text moves word by word; letter by letter is too busy for a paragraph. */}
           <p className="mt-4 text-base text-zinc-600">
             <MagneticLetters text="Get your lifetime access to the badge and perks by sponsoring me on GitHub. Your support keeps the library free and open source for everyone." />
             <br />
@@ -71,19 +114,22 @@ export default function Sponsors() {
           </p>
         </div>
 
+        {/* The sponsors wall: every sponsor from lib/sponsors.ts, then a tile to join them. */}
         <div className="mt-8 text-center">
           <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-4">
-            {Array.from({ length: WALL_SLOTS }, (_, slot) => (
-              <Link
-                key={slot}
-                href={SPONSOR_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={SLOT_CLASSES}
-              >
-                {slot === 0 ? "Your logo here" : "+"}
-              </Link>
+            {SPONSORS.map((sponsor) => (
+              <SponsorTile key={sponsor.url} sponsor={sponsor} />
             ))}
+
+            <a
+              href={SPONSOR_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Become a sponsor"
+              className={`${TILE_CLASSES} ${JOIN_TILE_CLASSES}`}
+            >
+              {hasSponsors ? "+" : "Your logo here"}
+            </a>
           </div>
         </div>
 
@@ -94,7 +140,7 @@ export default function Sponsors() {
 
           <div className="flex flex-wrap justify-center gap-4">
             {/* One link per button. The X icon is inside it, not a second link. */}
-            <Link
+            <a
               href={X_URL}
               target="_blank"
               rel="noopener noreferrer"
@@ -103,9 +149,9 @@ export default function Sponsors() {
             >
               <XIcon />
               <MagneticLetters text="Twitter / X" />
-            </Link>
+            </a>
 
-            <Link
+            <a
               href={`mailto:${CONTACT_EMAIL}`}
               data-magnetic="block"
               className={`${CONTACT_BUTTON_CLASSES} border border-black/20`}
@@ -116,7 +162,7 @@ export default function Sponsors() {
                 aria-hidden="true"
               />
               <MagneticLetters text="Email" />
-            </Link>
+            </a>
           </div>
         </div>
       </section>
