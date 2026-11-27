@@ -28,11 +28,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
       <body>
-        {/* <Script
+        <Script
           data-goatcounter="https://animate.goatcounter.com/count"
           strategy="afterInteractive"
           src="//gc.zgo.at/count.js"
-        /> */}
+        />
         <script
           defer
           src="https://cloud.umami.is/script.js"
