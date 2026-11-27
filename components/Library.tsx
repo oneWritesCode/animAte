@@ -7,6 +7,7 @@ import type { AnimationCategory, CssAnimationItem } from "@/lib/types";
 import { AnimationCard } from "./AnimationCard";
 import { CodeModal } from "./CodeModal";
 import { SearchIcon } from "./icons";
+import Link from "next/link";
 
 const STORAGE_KEY = "ilove-animations-favourites";
 
@@ -83,11 +84,41 @@ export function Library() {
   animation-iteration-count: infinite;
 }`}</style>
 
-      <div className="relative z-10 mb-t mt-8 ml-2">
-        <h2 className="text-3xl font-semibold tracking-tight ">
-          Animation Library
-        </h2>
-        <p className="my-2 ">Hover to see options</p>
+      <div className="relative flex item-center justify-between z-10 mb-t mt-8 ml-2">
+        <div>
+          <h2 className="text-3xl font-semibold tracking-tight leading-[0.8]">
+            Animation Library
+          </h2>
+          <p className="mb-2 ">Hover to see options</p>
+        </div>
+        <div>
+          <div className="flex items-center justify-center text-sm rounded-[0.75rem] border-2 border-gray-200 shadow-md px-2 py-2 bg-white">
+            <Link
+              href="https://github.com/onewritescode/animate"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="flex gap-2 capitalize "
+            >
+              <svg
+                className="w-4 aspect-square transition"
+                viewBox="0 0 50 50"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18.7503 39.5832C8.33366 42.7082 8.33366 34.3748 4.16699 33.3332M33.3337 45.8332V37.7707C33.4118 36.7773 33.2776 35.7786 32.9399 34.8411C32.6023 33.9035 32.0689 33.0486 31.3753 32.3332C37.917 31.604 44.792 29.1248 44.792 17.7498C44.7915 14.8411 43.6726 12.044 41.667 9.93733C42.6167 7.39255 42.5495 4.57972 41.4795 2.08316C41.4795 2.08316 39.0212 1.354 33.3337 5.1665C28.5587 3.87237 23.5253 3.87237 18.7503 5.1665C13.0628 1.354 10.6045 2.08316 10.6045 2.08316C9.53444 4.57972 9.46729 7.39255 10.417 9.93733C8.39642 12.0596 7.27641 14.882 7.29199 17.8123C7.29199 29.104 14.167 31.5832 20.7087 32.3957C20.0232 33.1039 19.4946 33.9486 19.1572 34.8747C18.8198 35.8007 18.6812 36.7875 18.7503 37.7707V45.8332"
+                  stroke="currentColor"
+                  strokeWidth="3.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <span>contribute</span>
+
+            </Link>
+          </div>
+        </div>
       </div>
 
       <label className="relative z-10 mb-6 block">
@@ -101,15 +132,16 @@ export function Library() {
           className="max-w-2xl min-w-xl rounded-full bg-white py-3 pr-4 pl-11 text-sm  outline-none"
         />
       </label>
-      <div className="mb-6 overflow-x-auto rounded-full border border-zinc-200 bg-zinc-50 p-1">
+      <div className="mb-4 inline-flex overflow-x-auto rounded-full border border-black/10 bg-zinc-50 p-1">
         <div className="flex min-w-max">
           {categories.map((c) => (
             <button
               key={c.id}
               type="button"
               onClick={() => setTab(c.id)}
-              className={`rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap transition ${tab === c.id ? "bg-white  shadow-sm" : " hover:"
-                }`}
+              className={`rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap transition ${
+                tab === c.id ? "bg-white  shadow-sm" : " hover:"
+              }`}
             >
               {c.label}
             </button>
@@ -117,9 +149,7 @@ export function Library() {
         </div>
       </div>
 
-      <p className="relative z-10 mb-4 text-sm ">
-        {items.length}+ animations
-      </p>
+      <p className="relative z-10 mb-4 text-sm ">{items.length}+ animations</p>
 
       {items.length === 0 ? (
         <div className="relative z-10 rounded-3xl border border-dashed border-zinc-200 py-16 text-center ">

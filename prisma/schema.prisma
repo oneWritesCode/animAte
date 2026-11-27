@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Example model for your sponsors wall. Change it to whatever you need.
+model Sponsor {
+  id        Int      @id @default(autoincrement())
+  name      String
+  url       String
+  logo      String
+  approved  Boolean  @default(false) // you approve each name before it shows
+  createdAt DateTime @default(now())
+}

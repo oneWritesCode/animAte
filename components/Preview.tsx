@@ -14,7 +14,10 @@ export function AnimationPreview({
 
   if (item.kind === "bg") {
     return (
-      <div key={replayKey} className={`absolute inset-0 ${loopClass} ${className}`}>
+      <div
+        key={replayKey}
+        className={`absolute inset-0 ${loopClass} ${className}`}
+      >
         <div className={`${item.className} h-full w-full`} />
       </div>
     );

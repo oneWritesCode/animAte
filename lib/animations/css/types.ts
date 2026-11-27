@@ -31,7 +31,7 @@ export type Def = {
 export const box = `  width: 72px;
   height: 72px;
   border-radius: 18px;
-  background: linear-gradient(135deg, #E8534A, #E8534A);`;
+  background: linear-gradient(135deg, #f5a57ace, #F5A67A);`;
 
 /** Same as before, plus the two new fields: `source` and `dependencies`. */
 export function build(def: Def): CssAnimationItem {
